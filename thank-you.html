@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You for Your Inquiry — Rovexa</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #FFFFFF;
+      color: #0A0A0A;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px;
+    }
+    .thank-you-card {
+      background-color: #FFFFFF;
+      border: 1px solid #EAEAEA;
+      border-radius: 24px;
+      padding: 50px 40px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+      text-align: center;
+    }
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background-color: rgba(208, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      color: #D00000;
+    }
+    .success-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+    .thank-you-card h1 {
+      font-family: var(--font-display);
+      font-size: 36px;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+    .thank-you-card p {
+      font-family: var(--font-body);
+      font-size: 16px;
+      margin-bottom: 30px;
+      color: #555555;
+    }
+    .details-box {
+      border: 1px solid #EAEAEA;
+      background-color: #FFFFFF;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: left;
+      margin-bottom: 36px;
+    }
+    .details-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      font-size: 14px;
+      border-bottom: 1px dashed #F5F5F5;
+      padding-bottom: 10px;
+    }
+    .details-row:last-child {
+      margin-bottom: 0;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .details-label {
+      color: #555555;
+      font-weight: 500;
+    }
+    .details-val {
+      font-weight: 700;
+      color: #0A0A0A;
+    }
+    .editor-btn {
+      width: 100%;
+      margin-bottom: 24px;
+      font-size: 16px;
+      padding: 16px 32px;
+      background-color: #D00000;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 99px;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .editor-btn:hover {
+      background-color: #B00000;
+      transform: scale(1.02);
+    }
+    .footer-support {
+      font-size: 13px;
+      color: #555555;
+    }
+    .footer-support a {
+      color: #D00000;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="thank-you-card">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h1>Message Sent!</h1>
+    <p>We've received your growth inquiry. Jassi or a member of the Rovexa team will get back to you within 24 hours.</p>
+
+    <div class="details-box">
+      <div class="details-row">
+        <span class="details-label">Name</span>
+        <span class="details-val" id="summaryName">-</span>
+      </div>
+      <div class="details-row">
+        <span class="details-label">Business Email</span>
+        <span class="details-val" id="summaryEmail">-</span>
+      </div>
+      <div class="details-row">
+        <span class="details-label">WhatsApp</span>
+        <span class="details-val" id="summaryWhatsapp">-</span>
+      </div>
+      <div class="details-row">
+        <span class="details-label">Brand Target</span>
+        <span class="details-val" id="summaryBrand">-</span>
+      </div>
+      <div class="details-row">
+        <span class="details-label">Selected Focus</span>
+        <span class="details-val" id="summaryFocus" style="text-transform: capitalize;">-</span>
+      </div>
+    </div>
+
+    <a href="/" class="editor-btn">Back to Home</a>
+
+    <div class="footer-support">
+      Have urgent bottlenecks? Contact us at: <a href="mailto:hello@rovexa.agency">hello@rovexa.agency</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById('summaryName').textContent = params.get('name') || '-';
+      document.getElementById('summaryEmail').textContent = params.get('email') || '-';
+      document.getElementById('summaryWhatsapp').textContent = params.get('whatsapp') || '-';
+      document.getElementById('summaryBrand').textContent = params.get('brand') || '-';
+      
+      const focus = params.get('focus') || '-';
+      document.getElementById('summaryFocus').textContent = focus;
+    });
+  </script>
+</body>
+</html>

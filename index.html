@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rovexa | Creative Growth Agency for Modern Brands</title>
+  <meta name="description" content="Rovexa is a creative growth agency helping modern brands grow through branding, websites, marketing, and operational systems.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Slide-Down Nav Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#services-focus">Focus</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#comparison">Compare</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Sticky Header -->
+  <header>
+    <div class="container header-container">
+      <a href="#" class="logo-lockup" aria-label="Rovexa Home">
+        <img src="images/logo.png" alt="Rovexa Logo">
+        Rovexa<sup>®</sup>
+      </a>
+      <div class="nav-actions">
+        <a href="#contact" class="btn-pill" id="header-cta">Get in Touch</a>
+        <button class="menu-trigger" id="menuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Custom Pointer Cursor Container (Ranveer/Pinda hover) -->
+  <div class="custom-cursor-container" id="customCursor">
+    <div class="custom-cursor-avatar" id="customCursorAvatar"></div>
+    <div class="custom-cursor-label" id="customCursorLabel">Pinda</div>
+  </div>
+
+  <main>
+    <!-- Section 1: Hero -->
+    <section class="hero-section">
+      <!-- Floating Badge & Loop line SVG assets -->
+      <div class="flower-badge-float" style="left: 10%; top: 12%;">
+        <img src="images/logo.png" alt="Rovexa Flower Badge">
+      </div>
+      <div class="flower-badge-float" style="right: 12%; top: 22%;">
+        <img src="images/logo.png" alt="Rovexa Flower Badge">
+      </div>
+      <div class="flower-badge-float" style="right: 8%; bottom: 18%;">
+        <img src="images/logo.png" alt="Rovexa Flower Badge">
+      </div>
+
+      <!-- Loop SVGs -->
+      <svg class="loop-svg-asset" style="left: -4%; top: 20%; width: 280px; height: 180px;" viewBox="0 0 320 200">
+        <path d="M20 130 C80 40, 150 36, 180 96 S280 170, 302 88" fill="none" />
+      </svg>
+      <svg class="loop-svg-asset" style="right: -4%; top: 24%; width: 300px; height: 200px;" viewBox="0 0 320 200">
+        <path d="M18 92 C80 24, 124 20, 184 88 S280 168, 304 90" fill="none" />
+      </svg>
+      <svg class="loop-svg-asset" style="left: 0%; bottom: 18%; width: 250px; height: 160px;" viewBox="0 0 320 200">
+        <path d="M18 42 C70 112, 120 148, 186 102 S246 26, 302 86" fill="none" />
+      </svg>
+      <svg class="loop-svg-asset" style="right: 0%; bottom: 14%; width: 250px; height: 160px;" viewBox="0 0 320 200">
+        <path d="M24 98 C76 44, 136 24, 190 84 S260 164, 304 116" fill="none" />
+      </svg>
+
+      <div class="container" style="position: relative; z-index: 2;">
+        <span class="hero-eyebrow scroll-reveal">Introducing</span>
+        <h1 class="hero-title scroll-reveal" id="heroHeading">
+          Growth ki yaad<br>
+          <span class="glow-text">nahi aayi, Jassi?</span>
+        </h1>
+        <p class="hero-subhead scroll-reveal">
+          Give me <span id="heroCountdown" style="font-weight: 700;">20:00</span> minutes with your brand and I'll show you what's been missing.
+        </p>
+        <div class="hero-ctas scroll-reveal">
+          <a href="#contact" class="btn-pill">Get in Touch</a>
+          <a href="#services" class="hero-micro-link">See what we shape</a>
+        </div>
+
+        <!-- Trusted Client social proof -->
+        <div class="hero-social-proof scroll-reveal">
+          <div class="social-proof-avatars">
+            <img src="images/pinda.png" alt="Pinda Client">
+            <img src="images/ranveer.png" alt="Ranveer Client">
+            <img src="images/element.png" alt="Client Logo">
+            <img src="images/logo.png" alt="Rovexa Logo">
+          </div>
+          <div class="social-proof-text">
+            <p class="handwriting">trusted by our clients</p>
+            <p class="stats">10+ brands grown</p>
+          </div>
+        </div>
+
+        <!-- Interactive selected focus pillars panel -->
+        <div class="selected-focus-section scroll-reveal" id="services-focus">
+          <div class="focus-pills-row">
+            <button class="focus-pill-btn active" data-pillar="marketing">Marketing</button>
+            <button class="focus-pill-btn" data-pillar="branding">Creative Branding</button>
+            <button class="focus-pill-btn" data-pillar="tech">Tech</button>
+            <button class="focus-pill-btn" data-pillar="operations">Operations &amp; Distribution</button>
+          </div>
+
+          <!-- Marketing Card -->
+          <div class="focus-panel-card active" id="pillar-marketing">
+            <span class="focus-card-meta">Selected Focus Pliiar</span>
+            <h3 class="focus-card-title">People scroll past a hundred brands a day.</h3>
+            <p class="focus-card-desc text-muted">Yours should be the one they remember, save, and send to someone else. We construct marketing setups that convert attention into sustainable volume.</p>
+            <div class="focus-details-grid">
+              <span class="focus-detail-tag">campaign strategy</span>
+              <span class="focus-detail-tag">content direction</span>
+              <span class="focus-detail-tag">smart reach</span>
+            </div>
+          </div>
+
+          <!-- Branding Card -->
+          <div class="focus-panel-card" id="pillar-branding">
+            <span class="focus-card-meta">Selected Focus Pliiar</span>
+            <h3 class="focus-card-title">First impressions do not wait around.</h3>
+            <p class="focus-card-desc text-muted">We make sure yours lands clean, fast, and hard to forget. We design premium brand languages that set you apart from competitors instantly.</p>
+            <div class="focus-details-grid">
+              <span class="focus-detail-tag">identity systems</span>
+              <span class="focus-detail-tag">art direction</span>
+              <span class="focus-detail-tag">voice and tone</span>
+            </div>
+          </div>
+
+          <!-- Tech Card -->
+          <div class="focus-panel-card" id="pillar-tech">
+            <span class="focus-card-meta">Selected Focus Pliiar</span>
+            <h3 class="focus-card-title">A slow, awkward website quietly loses clients.</h3>
+            <p class="focus-card-desc text-muted">We fix the experience before the opportunity disappears. Speed, custom integrations, and seamless user paths that guide visitors to checkouts.</p>
+            <div class="focus-details-grid">
+              <span class="focus-detail-tag">web experiences</span>
+              <span class="focus-detail-tag">conversion journeys</span>
+              <span class="focus-detail-tag">system design</span>
+            </div>
+          </div>
+
+          <!-- Operations Card -->
+          <div class="focus-panel-card" id="pillar-operations">
+            <span class="focus-card-meta">Selected Focus Pliiar</span>
+            <h3 class="focus-card-title">The best brands still miss deadlines.</h3>
+            <p class="focus-card-desc text-muted">We make sure that does not become your reputation. We streamline CRM, inventory, distribution networks, and automation pathways to let you scale cleanly.</p>
+            <div class="focus-details-grid">
+              <span class="focus-detail-tag">delivery systems</span>
+              <span class="focus-detail-tag">distribution support</span>
+              <span class="focus-detail-tag">operational flow</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Separator Line -->
+      <div class="container">
+        <div class="section-divider-container">
+          <hr class="section-divider-line">
+          <span class="section-divider-badge">Services</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Services Section -->
+    <section class="gallery-section scroll-reveal" id="services">
+      <div class="container">
+        <h2>One at a Time. Complete Growth.</h2>
+        <p class="gallery-subhead text-muted">We run deep diagnostics and execute full-funnel systems across five core growth pillars.</p>
+        
+        <!-- Services Grid -->
+        <div class="services-grid">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <div>
+              <span class="service-card-num">01 / Growth</span>
+              <h3 class="service-card-title">Full Growth Strategy</h3>
+              <p class="service-card-desc">An all-in-one comprehensive brand diagnostic and execution roadmap covering marketing loops, tech stacks, visual guidelines, and operations.</p>
+              <div class="service-card-deliverables">
+                <span class="service-card-tag">Full Diagnostic</span>
+                <span class="service-card-tag">Growth Playbook</span>
+                <span class="service-card-tag">Execution Roadmap</span>
+              </div>
+            </div>
+            <a href="#contact" class="service-card-link" data-pillar-link="growth">
+              Inquire about Growth &rarr;
+            </a>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card">
+            <div>
+              <span class="service-card-num">02 / Marketing</span>
+              <h3 class="service-card-title">Marketing &amp; Acquisition</h3>
+              <p class="service-card-desc">Identify channel inefficiencies, audit paid marketing accounts, outline organic social loops, and design sustainable customer acquisition volume structures.</p>
+              <div class="service-card-deliverables">
+                <span class="service-card-tag">Campaign Audits</span>
+                <span class="service-card-tag">Organic Hook Systems</span>
+                <span class="service-card-tag">Acquisition Strategy</span>
+              </div>
+            </div>
+            <a href="#contact" class="service-card-link" data-pillar-link="marketing">
+              Inquire about Marketing &rarr;
+            </a>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card">
+            <div>
+              <span class="service-card-num">03 / Operations</span>
+              <h3 class="service-card-title">Operations &amp; Automations</h3>
+              <p class="service-card-desc">Assess backend logistics, build automation pipelines (email/CRM), streamline toolchains, and automate alerts to reduce administrative friction.</p>
+              <div class="service-card-deliverables">
+                <span class="service-card-tag">Pipeline Automation</span>
+                <span class="service-card-tag">CRM Setup</span>
+                <span class="service-card-tag">Workflow Audits</span>
+              </div>
+            </div>
+            <a href="#contact" class="service-card-link" data-pillar-link="operations">
+              Inquire about Operations &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Reusable Divider Component -->
+      <div class="container">
+        <div class="section-divider-container">
+          <hr class="section-divider-line">
+          <span class="section-divider-badge">Process</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: How It Works -->
+    <section class="how-it-works-section scroll-reveal" id="how-it-works">
+      <div class="container">
+        <h2>Get Your Growth Roadmap in 3 Steps</h2>
+        <p class="section-subhead text-muted">We run high-precision diagnostics and build customized roadmap systems to scale your business.</p>
+        
+        <div class="steps-row">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <span class="step-card-num">Step 1</span>
+            <h3>Request an Audit</h3>
+            <p class="text-muted">Provide your brand details and select your primary growth focus to initialize the workspace.</p>
+          </div>
+          <!-- Step 2 (Interactive Customizer Mockup!) -->
+          <div class="step-card">
+            <span class="step-card-num">Step 2</span>
+            <h3>Deep-Dive Analysis</h3>
+            <p class="text-muted" style="margin-bottom: 20px;">Our analysts diagnose your metrics and compile actionable roadmaps.</p>
+            
+            <div class="step-card-visual">
+              <div class="mock-screen">
+                <div class="mock-screen-title">
+                  <span id="preview-name1">ROVEXA</span>
+                  <span style="font-family: var(--font-body); font-style: italic; display: block; font-size: 11px; margin: 2px 0;">x</span>
+                  <span id="preview-name2">AUDIT DASHBOARD</span>
+                </div>
+              </div>
+              <div class="interactive-editor-inputs">
+                <label for="name1-customizer">Brand Target Name</label>
+                <input type="text" id="name1-customizer" value="MY BRAND" maxlength="15">
+                <label for="name2-customizer">Primary Focus Focus</label>
+                <input type="text" id="name2-customizer" value="TECH AUDIT" maxlength="15">
+              </div>
+            </div>
+          </div>
+          <!-- Step 3 -->
+          <div class="step-card">
+            <span class="step-card-num">Step 3</span>
+            <h3>Get Your Plan</h3>
+            <p class="text-muted">Access your dashboard to schedule a live review call and execute the growth playbook.</p>
+          </div>
+        </div>
+        
+        <a href="#contact" class="btn-pill">Get in Touch</a>
+      </div>
+    </section>
+
+    <!-- Section 5: Comparison Table -->
+    <section class="comparison-section scroll-reveal" id="comparison">
+      <div class="container">
+        <h2>What Traditional Agencies Can't Do (But Rovexa Can)</h2>
+        <p class="section-subhead text-muted">See how we bridge strategy and execution with complete accountability — without the overhead.</p>
+        
+        <div class="table-wrapper">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Traditional Agencies</th>
+                <th>Freelancers</th>
+                <th>Rovexa</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="feature-col">
+                  <svg viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                  Speed
+                </td>
+                <td class="standard-col">Slow (Weeks to onboarding)</td>
+                <td class="standard-col">Variable</td>
+                <td class="nyota-col">Rapid (24hr Audits)</td>
+              </tr>
+              <tr>
+                <td class="feature-col">
+                  <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                  Core Focus
+                </td>
+                <td class="standard-col">Execution/Retainers</td>
+                <td class="standard-col">Isolated Tasks</td>
+                <td class="nyota-col">Direct growth focus</td>
+              </tr>
+              <tr>
+                <td class="feature-col">
+                  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-10 10M12 6a6 6 0 0 0-6 6M12 10a2 2 0 0 0-2 2M12 14v4M12 22v-2"></path><circle cx="12" cy="12" r="1"/></svg>
+                  Integration
+                </td>
+                <td class="standard-col">Siloed channels</td>
+                <td class="standard-col">Fragmented results</td>
+                <td class="nyota-col">All-in-one execution</td>
+              </tr>
+              <tr>
+                <td class="feature-col">
+                  <svg viewBox="0 0 24 24"><path d="M6 3h12M6 8h12M6 13h8M6 18h6M12 13c3 0 6 2.5 6 5.5s-3 5.5-6 5.5"></path></svg>
+                  Cost
+                </td>
+                <td class="standard-col">High Overhead</td>
+                <td class="standard-col">Unpredictable billing</td>
+                <td class="nyota-col">Flat service fees</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <a href="#contact" class="btn-pill">Get in Touch</a>
+      </div>
+
+      <!-- Reusable Divider Component -->
+      <div class="container">
+        <div class="section-divider-container">
+          <hr class="section-divider-line">
+          <span class="section-divider-badge">Testimonials</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Testimonials -->
+    <section class="testimonials-section scroll-reveal" id="testimonials">
+      <div class="container">
+        <h2>What Real Founders and Brands Say</h2>
+        <p class="section-subhead text-muted">Simple audits. Actionable roadmaps. Real growth results.</p>
+        
+        <div class="testimonials-scroller">
+          <!-- Card 1 -->
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Rovexa transformed our branding in weeks. The detail, the strategy, the execution... it was just WHAT."</p>
+            <h4 class="testimonial-author">Aman and team</h4>
+            <span class="testimonial-relationship">Co-founder, D2C Brand</span>
+          </div>
+          <!-- Card 2 -->
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Our conversion rate jumped 40% after the tech audit. Incredible speed and clean execution."</p>
+            <h4 class="testimonial-author">Rohan Mehta</h4>
+            <span class="testimonial-relationship">Product Head</span>
+          </div>
+          <!-- Card 3 -->
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Their operations system saved us 20 hours a week in shipping logs. Rovexa is 10/10."</p>
+            <h4 class="testimonial-author">Shreya Sen</h4>
+            <span class="testimonial-relationship">Operations Lead</span>
+          </div>
+          <!-- Card 4 -->
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"I've never worked with a growth partner that moves this fast and takes this much ownership."</p>
+            <h4 class="testimonial-author">Aditya Roy</h4>
+            <span class="testimonial-relationship">Founder, Fintech</span>
+          </div>
+          <!-- Card 5 -->
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Honestly, they feel like a core extension of our in-house team rather than an agency."</p>
+            <h4 class="testimonial-author">Neha Kapoor</h4>
+            <span class="testimonial-relationship">Marketing VP</span>
+          </div>
+          <!-- Card 6 -->
+          <div class="testimonial-card">
+            <p class="testimonial-quote">"Absolutely worth every rupee. The audit alone solved three major logistics bottlenecks."</p>
+            <h4 class="testimonial-author">Kabir Singh</h4>
+            <span class="testimonial-relationship">Growth Director</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: FAQ Accordion -->
+    <section class="faq-section scroll-reveal" id="faq">
+      <div class="container">
+        <h2>Questions? Answers.</h2>
+        
+        <div class="faq-accordion-container" id="faqContainer">
+          <!-- Accordion list generated via JS -->
+        </div>
+        
+        <button class="btn-pill" onclick="window.location.href='mailto:hello@rovexa.agency'">Any other question? Email Us</button>
+      </div>
+    </section>
+
+    <!-- Reusable Divider Component -->
+    <div class="container">
+      <div class="section-divider-container">
+        <hr class="section-divider-line">
+        <span class="section-divider-badge">Contact</span>
+      </div>
+    </div>
+
+    <!-- Section 7.5: Contact Section -->
+    <section class="contact-section scroll-reveal" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <!-- Info Column -->
+          <div class="contact-info">
+            <h2>Let's scale your brand.<br><span style="color: var(--accent-color);">Together.</span></h2>
+            <p class="text-muted">Fill out the form to request a growth diagnostic or discuss a campaign project. We review every submission and get back to you within 24 hours.</p>
+            
+            <div class="contact-details">
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <div class="contact-detail-text">
+                  <h4>Email Us Directly</h4>
+                  <p>hello@rovexa.agency</p>
+                </div>
+              </div>
+              
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                </div>
+                <div class="contact-detail-text">
+                  <h4>Chat on WhatsApp</h4>
+                  <p>+91 98765 43210</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Form Column -->
+          <div class="contact-form-card">
+            <form id="contactForm">
+              <div class="contact-form-group">
+                <label for="contactName">Your Name</label>
+                <input type="text" id="contactName" class="contact-form-input" placeholder="e.g. Jassi Gill" required>
+              </div>
+              
+              <div class="contact-form-group">
+                <label for="contactEmail">Business Email</label>
+                <input type="email" id="contactEmail" class="contact-form-input" placeholder="e.g. jassi@mybrand.com" required>
+              </div>
+              
+              <div class="contact-form-group">
+                <label for="contactWhatsapp">WhatsApp / Phone Number</label>
+                <input type="tel" id="contactWhatsapp" class="contact-form-input" placeholder="e.g. +91 98765 43210" value="+91 " required>
+              </div>
+              
+              <div class="contact-form-group">
+                <label for="contactBrand">Brand Name &amp; Website URL</label>
+                <input type="text" id="contactBrand" class="contact-form-input" placeholder="e.g. Brand Name (brand.com)" required>
+              </div>
+              
+              <div class="contact-form-group">
+                <label for="contactFocus">Primary Growth Focus</label>
+                 <select id="contactFocus" class="contact-form-select" required>
+                  <option value="" disabled selected>Select a focus area...</option>
+                  <option value="growth">Full Growth Strategy</option>
+                  <option value="marketing">Marketing &amp; Acquisition</option>
+                  <option value="operations">Operations &amp; Automations</option>
+                </select>
+              </div>
+              
+              <div class="contact-form-group">
+                <label for="contactMessage">Bottlenecks &amp; Project Scope</label>
+                <textarea id="contactMessage" class="contact-form-textarea" placeholder="Tell us about your conversion rate, ad spend, CRM workflows, or what you want us to audit..." required></textarea>
+              </div>
+              
+              <button type="submit" class="contact-form-submit-btn" id="submitBtn">Send Inquiry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Newsletter -->
+    <section class="newsletter-section scroll-reveal">
+      <div class="container">
+        <h2>Be the first to get our brand growth blueprints</h2>
+        <p class="section-subhead text-muted">Weekly summaries on conversion, visual languages, and CRM hacks.</p>
+        
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Rovexa Insights!'); this.reset();">
+          <input type="email" class="newsletter-input" placeholder="Email address" required>
+          <button type="submit" class="btn-pill">Subscribe</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <!-- Col 1 -->
+      <div class="footer-col-1">
+        <h2 class="footer-brand-title">Growth agency that helps brands grow.</h2>
+      </div>
+      
+      <!-- Col 2 -->
+      <div class="footer-col-2">
+        <h4>Need any help?</h4>
+        <p class="text-muted">We've got your back. Email us at:</p>
+        <a href="mailto:hello@rovexa.agency" class="footer-email">hello@rovexa.agency</a>
+        <div class="social-links">
+          <a href="#" class="social-icon-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <a href="#" class="social-icon-btn" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.107C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.388.511a3.002 3.002 0 0 0-2.11 2.107C0 8.047 0 12 0 12s0 3.953.502 5.837a3.002 3.002 0 0 0 2.11 2.107C4.495 20.455 12 20.455 12 20.455s7.505 0 9.388-.511a3.002 3.002 0 0 0 2.11-2.107C24 15.953 24 12 24 12s0-3.953-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Col 3 -->
+      <div class="footer-col-3">
+        <h4>Information</h4>
+        <ul class="footer-links-list">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Work</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms</a></li>
+        </ul>
+      </div>
+      
+      <!-- Col 4 -->
+      <div class="footer-col-4">
+        <div class="footer-cta-card">
+          <h3>Get in Touch with Our Team!</h3>
+          <p class="text-muted">Let's discuss your brand bottlenecks.</p>
+          <a href="#contact" class="btn-pill">Get in Touch</a>
+          <div class="footer-card-illus">
+            <!-- Sleek abstract growth arrow outline -->
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="45" fill="rgba(208, 0, 0, 0.08)"/>
+              <path d="M25 75L75 25M75 25H45M75 25V55" fill="none" stroke="#D00000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Elegant brand flower outline -->
+              <circle cx="45" cy="55" r="10" fill="none" stroke="#0A0A0A" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer Bottom Bar -->
+    <div class="container footer-bottom">
+      <div class="footer-bottom-left">
+        <span class="logo-star" style="width: 16px; height: 16px;">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+            <path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/>
+          </svg>
+        </span>
+        <span>© Rovexa 2026</span>
+      </div>
+      <div class="footer-bottom-right">
+        <span>Grow beautifully.</span>
+        <span class="logo-star">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/>
+          </svg>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interaction Layer Script -->
+  <script src="main.js"></script>
+</body>
+</html>
