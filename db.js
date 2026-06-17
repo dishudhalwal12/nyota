@@ -1,7 +1,30 @@
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs');
 
-const dbPath = path.join(__dirname, 'nyota.db');
+let dbPath = path.join(__dirname, 'nyota.db');
+
+// In serverless/Vercel environments, the root filesystem is read-only.
+// We copy the database to /tmp/ to make sure SQLite write operations (inquiries/orders) succeed.
+if (process.env.VERCEL || process.env.NOW_BUILD_TRIGGER) {
+  const tmpDbPath = path.join('/tmp', 'nyota.db');
+  try {
+    if (!fs.existsSync(tmpDbPath)) {
+      if (fs.existsSync(dbPath)) {
+        fs.copyFileSync(dbPath, tmpDbPath);
+        console.log('Successfully copied seed database to /tmp/nyota.db');
+      } else {
+        console.log('Seed database nyota.db not found in source directory.');
+      }
+    } else {
+      console.log('Database already exists in /tmp/nyota.db');
+    }
+    dbPath = tmpDbPath;
+  } catch (err) {
+    console.error('Failed to configure SQLite database in /tmp:', err);
+  }
+}
+
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Failed to connect to SQLite database:', err);
