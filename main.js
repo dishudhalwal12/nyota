@@ -536,29 +536,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     // 7. Initialize Springs
-    const morphSpring = new SpringSolver(0, 0.04, 0.12);
-    const rotateSpring = new SpringSolver(0, 0.04, 0.12);
-    const parallaxSpring = new SpringSolver(0, 0.03, 0.12);
+    const scrollSpring = new SpringSolver(0, 0.015, 0.10); // Root scroll smoother
+    const parallaxSpring = new SpringSolver(0, 0.02, 0.10); // Mouse parallax smoother
 
     const cardSprings = HERO_IMAGES.map((_, idx) => ({
-      x: new SpringSolver(scatterPositions[idx].x, 0.04, 0.15),
-      y: new SpringSolver(scatterPositions[idx].y, 0.04, 0.15),
-      rotation: new SpringSolver(scatterPositions[idx].rotation, 0.04, 0.15),
-      scale: new SpringSolver(0.6, 0.04, 0.15),
-      opacity: new SpringSolver(0, 0.03, 0.12)
+      x: new SpringSolver(scatterPositions[idx].x, 0.025, 0.14),
+      y: new SpringSolver(scatterPositions[idx].y, 0.025, 0.14),
+      rotation: new SpringSolver(scatterPositions[idx].rotation, 0.025, 0.14),
+      scale: new SpringSolver(0.6, 0.025, 0.14),
+      opacity: new SpringSolver(0, 0.025, 0.14)
     }));
 
     // 8. Animation Loop
     function tick() {
       // Update general springs
-      const morphValue = morphSpring.update();
-      const rotateValue = rotateSpring.update();
+      const smoothedScroll = scrollSpring.update();
       const parallaxValue = parallaxSpring.update();
 
-      // Set targets for general springs based on state
-      morphSpring.target = Math.min(Math.max(virtualScroll / 600, 0), 1);
-      rotateSpring.target = virtualScroll > 600 ? ((virtualScroll - 600) / 2400) * 360 : 0;
+      // Set targets
+      scrollSpring.target = virtualScroll;
       parallaxSpring.target = mouseX;
+
+      // Morph progress & rotation based on smoothed scroll
+      const morphValue = Math.min(Math.max(smoothedScroll / 600, 0), 1);
+      const rotateValue = smoothedScroll > 600 ? ((smoothedScroll - 600) / 2400) * 360 : 0;
 
       // Update intro text and active content opacity
       if (introTextBlock) {
