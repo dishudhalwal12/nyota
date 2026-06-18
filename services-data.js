@@ -1,53 +1,63 @@
 const servicesData = [
   {
-    id: "full-growth",
-    name: "Full Growth Audit",
-    category: "growth",
-    price: 2999,
-    description: "Deep-dive analysis of marketing, branding, tech, and operations with an actionable growth plan.",
-    class: "card-laavan", // Reused beautiful gradients
-    badge: "Most Popular",
-    tag: "Comprehensive Audit"
-  },
-  {
-    id: "marketing-audit",
-    name: "Marketing Audit",
-    category: "marketing",
-    price: 1499,
-    description: "Review of campaign strategies, content direction, social media footprint, and reach optimizations.",
-    class: "card-mandap",
+    id: "laavan",
+    name: "Laavan",
+    category: "sikh",
+    price: 3999,
+    description: "Perfect for Sikh weddings — effortless to edit, share. Designed to feel completely yours.",
+    class: "card-laavan",
     badge: "",
-    tag: "Pillar Specific"
+    tag: "Sikh Weddings"
   },
   {
-    id: "tech-audit",
-    name: "Tech & Speed Audit",
-    category: "tech",
-    price: 1999,
-    description: "Code health analysis, performance diagnostics, conversion paths, and site speed optimizations.",
-    class: "card-route",
-    badge: "New",
-    tag: "Pillar Specific"
+    id: "mandap",
+    name: "Mandap",
+    category: "hindu",
+    price: 3499,
+    description: "Built around the rituals that matter — mandap, mantras, and all.",
+    class: "card-mandap",
+    badge: "Popular",
+    tag: "Hindu Weddings"
   },
   {
-    id: "branding-audit",
-    name: "Branding Audit",
-    category: "branding",
-    price: 1499,
-    description: "Assess brand identity, visual consistency, voice, tone, and market positioning.",
+    id: "nikah-nama",
+    name: "Nikah Nama",
+    category: "muslim",
+    price: 2999,
+    description: "Elegant, understated, and true to tradition — for your nikah invite.",
     class: "card-nikah",
     badge: "",
-    tag: "Pillar Specific"
+    tag: "Muslim Weddings"
   },
   {
-    id: "operations-audit",
-    name: "Operations Audit",
-    category: "operations",
-    price: 1499,
-    description: "Delivery channels review, automation toolchains, CRM integration, and distribution support.",
+    id: "vow-veil",
+    name: "Vow & Veil",
+    category: "christian",
+    price: 2799,
+    description: "A clean, romantic template for church weddings and receptions.",
+    class: "card-vow",
+    badge: "",
+    tag: "Christian Weddings"
+  },
+  {
+    id: "thirumanam",
+    name: "Thirumanam",
+    category: "south-indian",
+    price: 3299,
+    description: "Inspired by South-Indian wedding motifs — kolam patterns, temple gold, and warmth.",
     class: "card-thirumanam",
     badge: "",
-    tag: "Pillar Specific"
+    tag: "South-Indian Weddings"
+  },
+  {
+    id: "the-route",
+    name: "The Route",
+    category: "save-date",
+    price: 2499,
+    description: "A playful save-the-date with a built-in map — because half your guests will ask for directions anyway.",
+    class: "card-route",
+    badge: "New",
+    tag: "Save the Date"
   }
 ];
 

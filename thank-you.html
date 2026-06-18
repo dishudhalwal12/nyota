@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You for Your Inquiry — Rovexa</title>
+  <title>Thank You for Your Order — Nyota</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     body {
-      background-color: #FFFFFF;
-      color: #0A0A0A;
+      background-color: #FAF8F5;
+      color: #0E0E0E;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 40px 24px;
+      font-family: 'Inter', sans-serif;
     }
     .thank-you-card {
       background-color: #FFFFFF;
-      border: 1px solid #EAEAEA;
+      border: 1px solid #E5E1DA;
       border-radius: 24px;
       padding: 50px 40px;
       max-width: 600px;
@@ -25,36 +27,39 @@
       box-shadow: 0 10px 40px rgba(0,0,0,0.02);
       text-align: center;
     }
+    @media (max-width: 576px) {
+      .thank-you-card {
+        padding: 40px 20px;
+      }
+    }
     .success-icon {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background-color: rgba(208, 0, 0, 0.05);
+      background-color: rgba(14,14,14,0.04);
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 30px;
-      color: #D00000;
-    }
-    .success-icon svg {
-      width: 36px;
-      height: 36px;
+      color: #0E0E0E;
+      font-size: 32px;
     }
     .thank-you-card h1 {
-      font-family: var(--font-display);
+      font-family: 'Playfair Display', serif;
       font-size: 36px;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       letter-spacing: -0.03em;
     }
     .thank-you-card p {
-      font-family: var(--font-body);
-      font-size: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
       margin-bottom: 30px;
       color: #555555;
+      line-height: 1.6;
     }
     .details-box {
-      border: 1px solid #EAEAEA;
-      background-color: #FFFFFF;
+      border: 1px solid #E5E1DA;
+      background-color: #FAF8F5;
       border-radius: 12px;
       padding: 24px;
       text-align: left;
@@ -65,7 +70,7 @@
       justify-content: space-between;
       margin-bottom: 12px;
       font-size: 14px;
-      border-bottom: 1px dashed #F5F5F5;
+      border-bottom: 1px dashed #E5E1DA;
       padding-bottom: 10px;
     }
     .details-row:last-child {
@@ -79,14 +84,14 @@
     }
     .details-val {
       font-weight: 700;
-      color: #0A0A0A;
+      color: #0E0E0E;
     }
     .editor-btn {
       width: 100%;
       margin-bottom: 24px;
       font-size: 16px;
       padding: 16px 32px;
-      background-color: #D00000;
+      background-color: #0E0E0E;
       color: #FFFFFF;
       border: none;
       border-radius: 99px;
@@ -94,10 +99,10 @@
       display: inline-block;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
     .editor-btn:hover {
-      background-color: #B00000;
+      background-color: #222222;
       transform: scale(1.02);
     }
     .footer-support {
@@ -105,8 +110,9 @@
       color: #555555;
     }
     .footer-support a {
-      color: #D00000;
+      color: #0E0E0E;
       font-weight: 600;
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -114,13 +120,11 @@
 
   <div class="thank-you-card">
     <div class="success-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="20 6 9 17 4 12"></polyline>
-      </svg>
+      ✦
     </div>
 
-    <h1>Message Sent!</h1>
-    <p>We've received your growth inquiry. Jassi or a member of the Rovexa team will get back to you within 24 hours.</p>
+    <h1>Workspace Ready!</h1>
+    <p>We've successfully generated your wedding invitation visual editor workspace. Click the button below to start customising your design.</p>
 
     <div class="details-box">
       <div class="details-row">
@@ -128,7 +132,7 @@
         <span class="details-val" id="summaryName">-</span>
       </div>
       <div class="details-row">
-        <span class="details-label">Business Email</span>
+        <span class="details-label">Email Address</span>
         <span class="details-val" id="summaryEmail">-</span>
       </div>
       <div class="details-row">
@@ -136,19 +140,19 @@
         <span class="details-val" id="summaryWhatsapp">-</span>
       </div>
       <div class="details-row">
-        <span class="details-label">Brand Target</span>
+        <span class="details-label">Wedding Location</span>
         <span class="details-val" id="summaryBrand">-</span>
       </div>
       <div class="details-row">
-        <span class="details-label">Selected Focus</span>
+        <span class="details-label">Selected Template</span>
         <span class="details-val" id="summaryFocus" style="text-transform: capitalize;">-</span>
       </div>
     </div>
 
-    <a href="/" class="editor-btn">Back to Home</a>
+    <a href="#" id="editorLinkBtn" class="editor-btn">Open Visual Editor</a>
 
     <div class="footer-support">
-      Have urgent bottlenecks? Contact us at: <a href="mailto:hello@rovexa.agency">hello@rovexa.agency</a>
+      Have questions or custom requests? Contact support: <a href="mailto:hello@nyota.design">hello@nyota.design</a>
     </div>
   </div>
 
@@ -162,6 +166,15 @@
       
       const focus = params.get('focus') || '-';
       document.getElementById('summaryFocus').textContent = focus;
+      
+      const slug = params.get('slug');
+      const editorLinkBtn = document.getElementById('editorLinkBtn');
+      if (slug) {
+        editorLinkBtn.setAttribute('href', `/editor/${slug}`);
+      } else {
+        editorLinkBtn.setAttribute('href', '/');
+        editorLinkBtn.textContent = 'Back to Home';
+      }
     });
   </script>
 </body>

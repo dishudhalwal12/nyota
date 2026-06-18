@@ -1,375 +1,419 @@
+// Nyota Client-Side Interactive Engine
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
-  renderFaqList();
-  
-  initStickyHeader();
-  initMobileMenu();
-  initInteractiveCustomizer();
-  initScrollReveal();
-  initHeroCountdown();
-  initCustomCursor();
-  initSelectedFocusTabs();
-  initContactForm();
-  initServicePreSelection();
-});
 
-/**
- * Renders Rovexa Agency FAQs
- */
-function renderFaqList() {
-  const container = document.getElementById('faqContainer');
-  if (!container) return;
+  // --- 1. Navigation & Header Animations ---
+  const mainHeader = document.querySelector('.main-header');
+  const menuToggle = document.getElementById('menuToggle');
+  const mobileNav = document.getElementById('mobileNav');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-  const faqs = [
-    { q: "What does the growth audit actually analyze?", a: "We analyze your entire brand footprint. This includes copy effectiveness, branding guidelines, site speeds, checkout friction, tracking systems, operational logistics, and distribution pipelines." },
-    { q: "How long does it take to get my completed roadmap?", a: "For single-pillar audits (Marketing, Tech, Branding, Operations), we deliver the workspace in 24 hours. The Full Growth Audit is delivered within 48 hours." },
-    { q: "Do you build the websites and setups you recommend?", a: "Yes. Rovexa is a full-execution growth agency. Once the audit highlights recommendations, you can hire us to implement the design, web builds, copy, automations, and campaigns." },
-    { q: "Is the audit price a recurring fee?", a: "No. All audits are a one-time flat service fee. There are no automatic renewals, monthly commitments, or hidden costs." },
-    { q: "What happens after I complete payment?", a: "You will receive an instant link to your Rovexa Growth Dashboard by email and WhatsApp. There, you can upload assets, track analysis in progress, and schedule the review call." },
-    { q: "Do you work with global brands?", a: "Yes, we work with D2C, B2B, and SaaS brands across India, North America, Europe, and Southeast Asia." }
+  // Add scroll listener for sticky header background blur
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      mainHeader.classList.add('scrolled');
+    } else {
+      mainHeader.classList.remove('scrolled');
+    }
+  });
+
+  // Toggle mobile menu
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+      menuToggle.classList.toggle('active');
+      
+      // Animate hamburger lines to X
+      const lines = menuToggle.querySelectorAll('.hamburger-line');
+      if (mobileNav.classList.contains('open')) {
+        lines[0].style.transform = 'rotate(45deg) translate(4px, 4px)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'rotate(-45deg) translate(4px, -4px)';
+      } else {
+        lines[0].style.transform = 'none';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = 'none';
+      }
+    });
+
+    // Close menu on link click
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        menuToggle.classList.remove('active');
+        const lines = menuToggle.querySelectorAll('.hamburger-line');
+        lines[0].style.transform = 'none';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = 'none';
+      });
+    });
+  }
+
+  // --- 2. Template Gallery Render & Filter ---
+  const templates = [
+    {
+      id: "laavan",
+      name: "Laavan",
+      category: "sikh",
+      price: 3999,
+      description: "Perfect for Sikh weddings — effortless to edit, share. Designed to feel completely yours.",
+      class: "card-laavan",
+      screenClass: "screen-laavan",
+      ornament: "✦",
+      names: "Harpreet &<br>Prabhjot",
+      date: "December 12, 2026",
+      location: "Amritsar",
+      badge: "",
+      tag: "Sikh Weddings"
+    },
+    {
+      id: "mandap",
+      name: "Mandap",
+      category: "hindu",
+      price: 3499,
+      description: "Built around the rituals that matter — mandap, mantras, and all.",
+      class: "card-mandap",
+      screenClass: "screen-mandap",
+      ornament: "❁",
+      names: "Abhishek &<br>Kanika",
+      date: "November 20, 2026",
+      location: "Mumbai",
+      badge: "Popular",
+      tag: "Hindu Weddings"
+    },
+    {
+      id: "nikah-nama",
+      name: "Nikah Nama",
+      category: "muslim",
+      price: 2999,
+      description: "Elegant, understated, and true to tradition — for your nikah invite.",
+      class: "card-nikah",
+      screenClass: "screen-nikah",
+      ornament: "✦",
+      names: "Zayn &<br>Yasmin",
+      date: "January 10, 2027",
+      location: "Lucknow",
+      badge: "",
+      tag: "Muslim Weddings"
+    },
+    {
+      id: "vow-veil",
+      name: "Vow & Veil",
+      category: "christian",
+      price: 2799,
+      description: "A clean, romantic template for church weddings and receptions.",
+      class: "card-vow",
+      screenClass: "screen-vow",
+      ornament: "❀",
+      names: "Chris &<br>Michelle",
+      date: "December 18, 2026",
+      location: "Goa",
+      badge: "",
+      tag: "Christian Weddings"
+    },
+    {
+      id: "thirumanam",
+      name: "Thirumanam",
+      category: "south-indian",
+      price: 3299,
+      description: "Inspired by South-Indian wedding motifs — kolam patterns, temple gold, and warmth.",
+      class: "card-thirumanam",
+      screenClass: "screen-thirumanam",
+      ornament: "❃",
+      names: "Karthik &<br>Divya",
+      date: "February 04, 2027",
+      location: "Chennai",
+      badge: "",
+      tag: "South-Indian Weddings"
+    },
+    {
+      id: "the-route",
+      name: "The Route",
+      category: "save-date",
+      price: 2499,
+      description: "A playful save-the-date with a built-in map — because half your guests will ask for directions anyway.",
+      class: "card-route",
+      screenClass: "screen-route",
+      ornament: "✵",
+      names: "Kabir &<br>Alia",
+      date: "December 25, 2026",
+      location: "Goa",
+      badge: "New",
+      tag: "Save the Date"
+    }
   ];
 
-  container.innerHTML = faqs.map((faq, index) => `
-    <div class="faq-item">
-      <button class="faq-header" aria-expanded="false" id="faq-btn-${index}">
-        <span class="faq-question">${faq.q}</span>
-        <span class="faq-toggle-icon">
-          <svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-        </span>
-      </button>
-      <div class="faq-panel" id="faq-panel-${index}">
-        <p class="faq-answer">${faq.a}</p>
-      </div>
-    </div>
-  `).join('');
+  const templatesGrid = document.getElementById('templatesGrid');
+  const filterChips = document.querySelectorAll('.filter-chip');
 
-  initFaqAccordion();
-}
+  // Render cards helper
+  function renderTemplates(filterCategory = 'all') {
+    if (!templatesGrid) return;
+    
+    templatesGrid.innerHTML = '';
+    
+    const filtered = templates.filter(t => {
+      if (filterCategory === 'all') return true;
+      return t.category === filterCategory;
+    });
+    
+    filtered.forEach(t => {
+      const card = document.createElement('div');
+      card.className = `template-card ${t.class}`;
+      card.innerHTML = `
+        <div class="template-device-frame">
+          <div class="template-device-screen ${t.screenClass}">
+            <div class="template-card-header-icons">
+              <div class="badge-row-left">
+                <span class="color-variants-badge" title="Color variants">🎨</span>
+                ${t.badge ? `<span style="font-size:9px; background:#0E0E0E; color:#FFF; padding:2px 8px; border-radius:99px; text-transform:uppercase; font-weight:600; letter-spacing:0.05em;">${t.badge}</span>` : ''}
+              </div>
+              <span class="eye-preview-btn" title="Live Preview">👁</span>
+            </div>
+            
+            <div class="screen-ornament">${t.ornament}</div>
+            <div class="template-desc-names">${t.names}</div>
+            
+            <div style="font-size: 11px; text-transform: uppercase; letter-spacing:0.05em; opacity: 0.8; margin-top: auto;">
+              ${t.date}<br>${t.location}
+            </div>
+          </div>
+        </div>
+        
+        <div class="template-meta-info">
+          <div class="template-name-row">
+            <span class="template-card-title">${t.name}</span>
+            <span class="template-card-category">${t.tag}</span>
+          </div>
+          <span class="template-price-badge">₹${t.price.toLocaleString('en-IN')}</span>
+        </div>
+        
+        <p class="template-card-body-text">${t.description}</p>
+        
+        <button class="template-select-cta" data-template-id="${t.id}">Choose Template</button>
+      `;
+      templatesGrid.appendChild(card);
+    });
 
-/**
- * Sticky Header Scroll States
- */
-function initStickyHeader() {
-  const header = document.querySelector('header');
-  if (!header) return;
+    // Add event listeners to newly created buttons
+    document.querySelectorAll('.template-select-cta').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const templateId = e.target.getAttribute('data-template-id');
+        openCheckoutModal(templateId);
+      });
+    });
 
-  const handleScroll = () => {
-    if (window.scrollY > 30) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+  }
+
+  // Initial gallery rendering
+  renderTemplates();
+
+  // Handle category chip filter changes
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      filterChips.forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+      
+      const category = e.target.getAttribute('data-category');
+      renderTemplates(category);
+    });
+  });
+
+  // --- 3. Checkout Modal & Payment integration ---
+  const checkoutModal = document.getElementById('checkoutModal');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const checkoutForm = document.getElementById('checkoutForm');
+  const modalTemplateName = document.getElementById('modalTemplateName');
+  const modalTemplatePrice = document.getElementById('modalTemplatePrice');
+  const payButton = document.getElementById('payButton');
+
+  let activeTemplateId = null;
+
+  function openCheckoutModal(templateId) {
+    const template = templates.find(t => t.id === templateId);
+    if (!template) return;
+    
+    activeTemplateId = templateId;
+    modalTemplateName.textContent = `Template: ${template.name} (${template.tag})`;
+    modalTemplatePrice.textContent = `₹${template.price.toLocaleString('en-IN')}`;
+    
+    if (checkoutModal) {
+      checkoutModal.classList.add('open');
+      document.body.style.overflow = 'hidden'; // prevent scroll
     }
-  };
+  }
 
-  window.addEventListener('scroll', handleScroll);
-  handleScroll();
-}
-
-/**
- * Mobile slide navigation overlay toggle
- */
-function initMobileMenu() {
-  const trigger = document.querySelector('.menu-trigger');
-  const overlay = document.querySelector('.nav-overlay');
-  const links = document.querySelectorAll('.nav-links a');
-  
-  if (!trigger || !overlay) return;
-
-  const toggleMenu = () => {
-    const isOpen = overlay.classList.toggle('open');
-    trigger.classList.toggle('active', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  };
-
-  trigger.addEventListener('click', toggleMenu);
-
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      overlay.classList.remove('open');
-      trigger.classList.remove('active');
+  function closeCheckoutModal() {
+    if (checkoutModal) {
+      checkoutModal.classList.remove('open');
       document.body.style.overflow = '';
-    });
-  });
-}
+      checkoutForm.reset();
+    }
+  }
 
-/**
- * Step 2: Interactive Customizer Mockup
- */
-function initInteractiveCustomizer() {
-  const name1Input = document.getElementById('name1-customizer');
-  const name2Input = document.getElementById('name2-customizer');
-  const previewName1 = document.getElementById('preview-name1');
-  const previewName2 = document.getElementById('preview-name2');
-  
-  if (!name1Input || !name2Input || !previewName1 || !previewName2) return;
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeCheckoutModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeCheckoutModal);
 
-  const updateNames = () => {
-    previewName1.textContent = name1Input.value.trim().toUpperCase() || 'MY BRAND';
-    previewName2.textContent = name2Input.value.trim().toUpperCase() || 'TECH AUDIT';
-  };
-
-  name1Input.addEventListener('input', updateNames);
-  name2Input.addEventListener('input', updateNames);
-}
-
-/**
- * FAQ Accordion Expand & Collapse
- */
-function initFaqAccordion() {
-  const faqItems = document.querySelectorAll('.faq-item');
-  if (!faqItems.length) return;
-
-  faqItems.forEach(item => {
-    const header = item.querySelector('.faq-header');
-    const panel = item.querySelector('.faq-panel');
-    
-    if (!header || !panel) return;
-
-    header.addEventListener('click', () => {
-      const isActive = item.classList.contains('active');
+  // Submit checkout form & integrate Razorpay payments
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
       
-      faqItems.forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.classList.remove('active');
-          const otherPanel = otherItem.querySelector('.faq-panel');
-          if (otherPanel) otherPanel.style.maxHeight = null;
+      const custName = document.getElementById('custName').value;
+      const custEmail = document.getElementById('custEmail').value;
+      const custWhatsapp = document.getElementById('custWhatsapp').value;
+      const eventTitle = document.getElementById('eventTitle').value;
+
+      if (!activeTemplateId) return;
+
+      payButton.disabled = true;
+      payButton.textContent = 'Processing Workspace Setup...';
+
+      try {
+        // 1. Create order on the Express server backend
+        const response = await fetch('/api/create-order', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            template_id: activeTemplateId,
+            customer_name: custName,
+            email: custEmail,
+            whatsapp: custWhatsapp,
+            event_title: eventTitle
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to create order on server');
         }
-      });
 
-      if (isActive) {
-        item.classList.remove('active');
-        panel.style.maxHeight = null;
-      } else {
-        item.classList.add('active');
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+        const orderData = await response.json();
+
+        // 2. Configure and trigger Razorpay Checkout popup
+        const options = {
+          key: orderData.key_id,
+          amount: orderData.amount,
+          currency: orderData.currency,
+          name: 'Nyota Invites',
+          description: `Visual editor access for template: ${activeTemplateId}`,
+          order_id: orderData.order_id,
+          handler: async function (paymentResponse) {
+            payButton.textContent = 'Verifying Transaction...';
+            
+            try {
+              // 3. Verify Razorpay signature on our backend
+              const verifyResponse = await fetch('/api/verify-payment', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  razorpay_order_id: orderData.order_id,
+                  razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                  razorpay_signature: paymentResponse.razorpay_signature
+                })
+              });
+
+              const verificationResult = await verifyResponse.json();
+
+              if (verificationResult.success) {
+                // Redirect to thank-you confirmation page with details
+                closeCheckoutModal();
+                window.location.href = `/thank-you?name=${encodeURIComponent(custName)}&email=${encodeURIComponent(custEmail)}&whatsapp=${encodeURIComponent(custWhatsapp)}&brand=${encodeURIComponent(eventTitle)}&focus=${encodeURIComponent(activeTemplateId)}&slug=${verificationResult.editor_slug}`;
+              } else {
+                alert('Payment verification failed. Please contact hello@nyota.design');
+                payButton.disabled = false;
+                payButton.textContent = 'Proceed to Customize (Pay Now)';
+              }
+            } catch (err) {
+              console.error('Error during verification fetch:', err);
+              alert('Network error verifying payment.');
+              payButton.disabled = false;
+              payButton.textContent = 'Proceed to Customize (Pay Now)';
+            }
+          },
+          prefill: {
+            name: custName,
+            email: custEmail,
+            contact: custWhatsapp
+          },
+          theme: {
+            color: '#111111'
+          },
+          modal: {
+            ondismiss: function () {
+              payButton.disabled = false;
+              payButton.textContent = 'Proceed to Customize (Pay Now)';
+            }
+          }
+        };
+
+        const rzp1 = new Razorpay(options);
+        rzp1.open();
+
+      } catch (err) {
+        console.error('Checkout creation error:', err);
+        alert('Could not connect to payment gateway. Please check your credentials or network connection.');
+        payButton.disabled = false;
+        payButton.textContent = 'Proceed to Customize (Pay Now)';
       }
     });
-  });
-}
-
-/**
- * Intersection Observer scroll triggers
- */
-function initScrollReveal() {
-  const elements = document.querySelectorAll('.scroll-reveal');
-  if (!elements.length) return;
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.05
-  };
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  elements.forEach(el => observer.observe(el));
-}
-
-/**
- * 20-minute local storage countdown timer
- */
-function initHeroCountdown() {
-  const timerLabel = document.getElementById('heroCountdown');
-  if (!timerLabel) return;
-
-  const countdownMinutes = 20;
-  const countdownDurationSeconds = countdownMinutes * 60;
-  const storageKey = 'rovexa:countdown';
-  
-  let startedAt = Date.now();
-  const saved = localStorage.getItem(storageKey);
-  
-  if (saved) {
-    try {
-      const parsed = JSON.parse(saved);
-      if (parsed.startedAt && (Date.now() - parsed.startedAt < countdownDurationSeconds * 1000)) {
-        startedAt = parsed.startedAt;
-      } else {
-        localStorage.setItem(storageKey, JSON.stringify({ startedAt }));
-      }
-    } catch {
-      localStorage.setItem(storageKey, JSON.stringify({ startedAt }));
-    }
-  } else {
-    localStorage.setItem(storageKey, JSON.stringify({ startedAt }));
   }
 
-  const updateTimer = () => {
-    const elapsedSeconds = Math.floor((Date.now() - startedAt) / 1000);
-    const remainingSeconds = Math.max(0, countdownDurationSeconds - elapsedSeconds);
-    
-    if (remainingSeconds === 0) {
-      startedAt = Date.now();
-      localStorage.setItem(storageKey, JSON.stringify({ startedAt }));
-    }
-
-    const minutes = Math.floor(remainingSeconds / 60);
-    const seconds = remainingSeconds % 60;
-    
-    timerLabel.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-  };
-
-  updateTimer();
-  setInterval(updateTimer, 1000);
-}
-
-/**
- * Custom Cursors tracking over Hero Heading
- */
-function initCustomCursor() {
-  const heading = document.getElementById('heroHeading');
-  const cursor = document.getElementById('customCursor');
-  const avatar = document.getElementById('customCursorAvatar');
-  const label = document.getElementById('customCursorLabel');
-
-  if (!heading || !cursor || !avatar || !label) return;
-
-  // Track if hovering is enabled based on media capabilities (fine pointers only)
-  const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  if (!isFinePointer) return;
-
-  heading.style.cursor = 'none';
-
-  heading.addEventListener('pointerenter', (e) => {
-    cursor.classList.add('visible');
-    updateCursorAvatar(e);
-  });
-
-  heading.addEventListener('pointermove', (e) => {
-    cursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
-    updateCursorAvatar(e);
-  });
-
-  heading.addEventListener('pointerleave', () => {
-    cursor.classList.remove('visible');
-  });
-
-  function updateCursorAvatar(e) {
-    const bounds = heading.getBoundingClientRect();
-    const isLeft = e.clientX < bounds.left + bounds.width / 2;
-    
-    if (isLeft) {
-      avatar.style.backgroundImage = "url('images/pinda.png')";
-      label.textContent = 'Pinda';
-    } else {
-      avatar.style.backgroundImage = "url('images/ranveer.png')";
-      label.textContent = 'Ranveer';
-    }
-  }
-}
-
-/**
- * Switch tabs in Selected Focus pillar list
- */
-function initSelectedFocusTabs() {
-  const buttons = document.querySelectorAll('.focus-pill-btn');
-  const cards = document.querySelectorAll('.focus-panel-card');
+  // --- 4. FAQ Accordion Panels ---
+  const faqQuestions = document.querySelectorAll('.faq-question');
   
-  if (!buttons.length || !cards.length) return;
-
-  buttons.forEach(btn => {
+  faqQuestions.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Set active button
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+      const parent = btn.parentElement;
+      const isActive = parent.classList.contains('active');
       
-      const targetPillar = btn.getAttribute('data-pillar');
+      // Close all open panels
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+        item.querySelector('.faq-answer').style.maxHeight = null;
+      });
       
-      // Toggle card panel displays
-      cards.forEach(card => {
-        card.classList.remove('active');
-        if (card.id === `pillar-${targetPillar}`) {
-          card.classList.add('active');
-        }
-      });
-    });
-  });
-}
-
-/**
- * Contact/Inquiry Form Submission
- */
-function initContactForm() {
-  const form = document.getElementById('contactForm');
-  if (!form) return;
-
-  const submitBtn = document.getElementById('submitBtn');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById('contactName').value.trim();
-    const email = document.getElementById('contactEmail').value.trim();
-    const whatsapp = document.getElementById('contactWhatsapp').value.trim();
-    const brand = document.getElementById('contactBrand').value.trim();
-    const focus = document.getElementById('contactFocus').value;
-    const message = document.getElementById('contactMessage').value.trim();
-
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-    }
-
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          customer_name: name,
-          email: email,
-          whatsapp: whatsapp,
-          brand_name: brand,
-          focus_area: focus,
-          message: message
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      if (data.success) {
-        // Redirect to thank-you page with query details
-        window.location.href = `/thank-you?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&whatsapp=${encodeURIComponent(whatsapp)}&brand=${encodeURIComponent(brand)}&focus=${encodeURIComponent(focus)}&message=${encodeURIComponent(message)}`;
-      } else {
-        alert('Something went wrong. Please try again.');
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Inquiry';
-        }
-      }
-    } catch (err) {
-      console.error('Inquiry submission error:', err);
-      alert('Failed to send message. Please try again or email us directly.');
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Send Inquiry';
-      }
-    }
-  });
-}
-
-/**
- * Service Cards selection scrolls to contact form and pre-fills focus selection
- */
-function initServicePreSelection() {
-  const links = document.querySelectorAll('[data-pillar-link]');
-  const select = document.getElementById('contactFocus');
-  if (!links.length || !select) return;
-
-  links.forEach(link => {
-    link.addEventListener('click', () => {
-      const pillar = link.getAttribute('data-pillar-link');
-      if (pillar) {
-        select.value = pillar;
+      if (!isActive) {
+        parent.classList.add('active');
+        const answer = parent.querySelector('.faq-answer');
+        // dynamically set max height for animation
+        answer.style.maxHeight = answer.scrollHeight + 'px';
       }
     });
   });
-}
+
+  // --- 5. Newsletter Submission Handler ---
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for subscribing to Nyota releases! We\'ll notify you when new templates go live.');
+      newsletterForm.reset();
+    });
+  }
+
+  // --- 6. Smooth Scroll Helper ---
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        e.preventDefault();
+        targetElement.scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+
+
+});

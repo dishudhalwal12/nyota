@@ -41,20 +41,20 @@ app.get('/thank-you', (req, res) => {
 });
 
 /**
- * Route: Rovexa Audit Dashboard
- * Displays the status and results of the purchased brand audit.
+ * Route: Nyota Invite Workspace
+ * Displays the visual editor mockup for the purchased wedding invitation website template.
  */
 app.get('/editor/:slug', async (req, res) => {
   const slug = req.params.slug;
   try {
     const order = await db.getOrderBySlug(slug);
     if (!order) {
-      return res.status(404).send('<h1>Audit workspace expired or invalid</h1>');
+      return res.status(404).send('<h1>Visual workspace expired or invalid</h1>');
     }
     
-    // Look up service details
+    // Look up template details
     const service = servicesData.find(s => s.id === order.template_id);
-    const serviceName = service ? service.name : 'Brand Audit';
+    const serviceName = service ? service.name : 'Wedding Invite';
     
     res.send(`
       <!DOCTYPE html>
@@ -62,79 +62,214 @@ app.get('/editor/:slug', async (req, res) => {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Rovexa Audit Workspace — ${order.event_title}</title>
-        <link rel="stylesheet" href="/styles.css">
+        <title>Nyota Editor — ${order.event_title}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
         <style>
           body {
             background-color: #FAF8F5;
-            padding: 40px 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-          }
-          .editor-panel {
-            background: #FFFFFF;
-            border: 1px solid #E5E1DA;
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 650px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            text-align: left;
-          }
-          .editor-header {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #E5E1DA;
-            padding-bottom: 20px;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            color: #0E0E0E;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            min-height: 100vh;
           }
-          .editor-header h1 {
-            font-size: 28px;
-            margin-bottom: 8px;
-            letter-spacing: -0.03em;
-          }
-          .mock-canvas {
-            border: 1px dashed #E5E1DA;
-            padding: 30px;
-            border-radius: 12px;
-            background: #FAF8F5;
-            margin: 20px 0;
-            font-family: var(--font-body);
-            color: #111;
-          }
-          .editor-actions {
+          header {
+            background: #FFFFFF;
+            border-bottom: 1px solid #E5E1DA;
+            padding: 16px 32px;
             display: flex;
-            gap: 16px;
-            margin-top: 30px;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .logo {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Playfair Display', serif;
           }
           .badge {
-            display: inline-block;
             background: #0E0E0E;
             color: #FAF8F5;
-            padding: 6px 14px;
+            padding: 4px 10px;
             border-radius: 99px;
-            font-size: 10px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+          }
+          .workspace {
+            display: flex;
+            flex: 1;
+          }
+          @media (max-width: 768px) {
+            .workspace {
+              flex-direction: column-reverse;
+            }
+          }
+          .sidebar {
+            width: 380px;
+            background: #FFFFFF;
+            border-right: 1px solid #E5E1DA;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-sizing: border-box;
+          }
+          @media (max-width: 768px) {
+            .sidebar {
+              width: 100%;
+              border-right: none;
+              border-top: 1px solid #E5E1DA;
+            }
+          }
+          .sidebar h2 {
+            font-size: 22px;
+            margin: 0 0 4px 0;
+            letter-spacing: -0.03em;
+            font-family: 'Playfair Display', serif;
+          }
+          .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+          }
+          .form-group label {
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 16px;
+            letter-spacing: 0.05em;
+            color: #666;
           }
-          .status-indicator {
+          .form-input {
+            border: 1px solid #E5E1DA;
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-family: inherit;
+            font-size: 14px;
+            color: inherit;
+            background-color: #FAF8F5;
+          }
+          .form-input:focus {
+            outline: none;
+            border-color: #111111;
+          }
+          .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background-color: #FAF8F5;
+          }
+          .phone-mockup {
+            width: 320px;
+            height: 568px;
+            background: #FFFFFF;
+            border: 12px solid #0E0E0E;
+            border-radius: 36px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.04);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+          }
+          .phone-screen {
+            flex: 1;
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            background: linear-gradient(135deg, #FAF8F5 0%, #FFFDF9 100%);
+            box-sizing: border-box;
+          }
+          .screen-ornament {
+            font-size: 24px;
+            color: #D4AF37;
+          }
+          .screen-names {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 16px 0;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+          }
+          .screen-details {
+            font-size: 14px;
+            color: #555555;
+            line-height: 1.6;
+          }
+          .screen-btn {
+            background: #111111;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 99px;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+          }
+          .editor-actions {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          }
+          .btn-pill {
+            background: #111111;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 99px;
+            padding: 14px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+          }
+          .btn-pill:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+          }
+          .btn-outline {
+            background: transparent;
+            color: #111111;
+            border: 1px solid #111111;
+            border-radius: 99px;
+            padding: 14px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+          }
+          .btn-outline:hover {
+            background: #FAF8F5;
+          }
+          .live-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: #D4AF37;
-            margin-top: 10px;
+            color: #2E7D32;
+            margin-bottom: 8px;
           }
-          .status-dot {
+          .live-dot {
             width: 8px;
             height: 8px;
-            background-color: #D4AF37;
+            background-color: #2E7D32;
             border-radius: 50%;
             animation: pulse 1.5s infinite;
           }
@@ -146,39 +281,94 @@ app.get('/editor/:slug', async (req, res) => {
         </style>
       </head>
       <body>
-        <div class="editor-panel">
-          <div class="editor-header">
-            <span class="badge">${serviceName}</span>
-            <h1>Rovexa Growth Workspace</h1>
-            <p class="text-muted">Prepared for: <strong>${order.event_title}</strong></p>
-            <div class="status-indicator">
-              <span class="status-dot"></span>
-              Audit Analysis in Progress (Will be ready in 24 hours)
+        <header>
+          <div class="logo">
+            ✦ Nyota <span class="badge" style="margin-left: 12px;">Visual Editor</span>
+          </div>
+          <div style="font-size: 13px; color: #666;">
+            Template: <strong>${serviceName}</strong>
+          </div>
+        </header>
+        
+        <div class="workspace">
+          <div class="sidebar">
+            <div>
+              <h2>Edit Invitation</h2>
+              <p style="font-size: 13px; color: #666; margin: 0 0 20px 0;">Customise your invite parameters in real time.</p>
+            </div>
+            
+            <div class="form-group">
+              <label>Partner 1 Name</label>
+              <input type="text" id="partner1" class="form-input" value="${order.customer_name}">
+            </div>
+            
+            <div class="form-group">
+              <label>Partner 2 Name</label>
+              <input type="text" id="partner2" class="form-input" value="Kanika">
+            </div>
+            
+            <div class="form-group">
+              <label>Event Date</label>
+              <input type="text" id="eventDate" class="form-input" value="November 20, 2026">
+            </div>
+            
+            <div class="form-group">
+              <label>Venue Location</label>
+              <input type="text" id="venue" class="form-input" value="${order.event_title}">
+            </div>
+            
+            <div class="editor-actions">
+              <button class="btn-pill" onclick="alert('Invite changes successfully published!')">Publish Changes</button>
+              <a href="/" class="btn-outline">Exit Editor</a>
             </div>
           </div>
           
-          <div class="mock-canvas">
-            <h3 style="font-size: 18px; margin-bottom: 10px; font-family: var(--font-display);">Next Actions</h3>
-            <p class="text-muted" style="font-size: 14px; line-height: 1.5; margin-bottom: 15px;">
-              Our growth analysts are reviewing your brand touchpoints. Your custom dashboard link has been saved and sent to:
-            </p>
-            <ul style="font-size: 14px; margin-left: 20px; color: var(--text-color); line-height: 1.8;">
-              <li>Email: <strong>${order.email}</strong></li>
-              <li>WhatsApp: <strong>${order.whatsapp}</strong></li>
-            </ul>
-          </div>
-          
-          <p class="text-muted" style="font-size: 13px; margin-top: 20px;">
-            Save this link to access your completed audit document later:
-            <br>
-            <code style="background: rgba(0,0,0,0.03); padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 8px; font-size: 12px; font-family: monospace;">http://localhost:${PORT}/editor/${slug}</code>
-          </p>
-
-          <div class="editor-actions">
-            <button class="btn-pill" onclick="alert('Our team has been notified. We will contact you shortly!')" style="font-size: 14px; padding: 12px 24px;">Schedule Call</button>
-            <a href="/" class="btn-outline" style="font-size: 14px; padding: 12px 24px;">Back to Home</a>
+          <div class="preview-area">
+            <div class="live-badge">
+              <span class="live-dot"></span>
+              Live Preview
+            </div>
+            <div class="phone-mockup">
+              <div class="phone-screen">
+                <div class="screen-ornament">⚜</div>
+                <div>
+                  <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #888;">Save the Date</div>
+                  <div class="screen-names" id="previewNames">${order.customer_name} & Kanika</div>
+                  <div style="font-size: 12px; font-style: italic; color: #666; margin-top: 8px;">Are getting married</div>
+                </div>
+                <div>
+                  <div class="screen-details" id="previewDetails">
+                    <strong id="previewDate">November 20, 2026</strong><br>
+                    <span id="previewVenue">${order.event_title}</span>
+                  </div>
+                  <button class="screen-btn" onclick="alert('This will trigger RSVP submission form.')">RSVP Now</button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        
+        <script>
+          const p1Input = document.getElementById('partner1');
+          const p2Input = document.getElementById('partner2');
+          const dateInput = document.getElementById('eventDate');
+          const venueInput = document.getElementById('venue');
+          
+          const namesPreview = document.getElementById('previewNames');
+          const datePreview = document.getElementById('previewDate');
+          const venuePreview = document.getElementById('previewVenue');
+          
+          function updatePreview() {
+            namesPreview.textContent = p1Input.value + ' & ' + p2Input.value;
+            datePreview.textContent = dateInput.value;
+            venuePreview.textContent = venueInput.value;
+          }
+          
+          p1Input.addEventListener('input', updatePreview);
+          p2Input.addEventListener('input', updatePreview);
+          dateInput.addEventListener('input', updatePreview);
+          venueInput.addEventListener('input', updatePreview);
+        </script>
       </body>
       </html>
     `);
@@ -199,10 +389,10 @@ app.post('/api/create-order', async (req, res) => {
     return res.status(400).json({ error: 'Missing required details.' });
   }
 
-  // Look up selected service price from servicesData configuration array
+  // Look up selected template price from servicesData configuration array
   const service = servicesData.find(s => s.id === template_id);
   if (!service) {
-    return res.status(404).json({ error: 'Audit type not found.' });
+    return res.status(404).json({ error: 'Template not found.' });
   }
 
   const priceAmount = service.price;
@@ -216,7 +406,7 @@ app.post('/api/create-order', async (req, res) => {
       const options = {
         amount: priceAmount * 100, // paise
         currency: 'INR',
-        receipt: `receipt_rovexa_${crypto.randomBytes(4).toString('hex')}`
+        receipt: `receipt_nyota_${crypto.randomBytes(4).toString('hex')}`
       };
       
       const response = await razorpay.orders.create(options);
@@ -377,23 +567,23 @@ async function triggerDelivery(order) {
           'Authorization': `Bearer ${process.env.RESEND_API_KEY}`
         },
         body: JSON.stringify({
-          from: 'Rovexa Growth <audits@rovexa.agency>',
+          from: 'Nyota Invites <hello@nyota.design>',
           to: order.email,
-          subject: 'Your Rovexa Brand Audit dashboard is ready 🎉',
+          subject: 'Your Nyota Wedding Website is ready 🎉',
           html: `
             <div style="font-family: sans-serif; max-width: 600px; padding: 20px; line-height: 1.6; color: #111;">
               <h2 style="font-size: 24px; letter-spacing: -0.02em;">Hi ${order.customer_name},</h2>
-              <p>Thank you for choosing Rovexa! We have registered your audit request and our analysts are reviewing your brand touchpoints.</p>
-              <p><strong>Audit selection:</strong> ${serviceName}</p>
-              <p><strong>Brand target:</strong> ${order.event_title}</p>
-              <p>You can monitor progress, upload brand files, and schedule your live review call from your unique dashboard:</p>
+              <p>Thank you for choosing Nyota! We have generated your wedding website workspace. You can now use the visual editor to customise it.</p>
+              <p><strong>Template selection:</strong> ${serviceName}</p>
+              <p><strong>Wedding:</strong> ${order.event_title}</p>
+              <p>You can customise details, edit templates, and publish your live invite page from your workspace:</p>
               <p style="margin: 30px 0;">
-                <a href="${dashboardLink}" style="background-color: #111111; color: #ffffff; padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 500; display: inline-block;">View Audit Dashboard</a>
+                <a href="${dashboardLink}" style="background-color: #111111; color: #ffffff; padding: 12px 28px; border-radius: 99px; text-decoration: none; font-weight: 500; display: inline-block;">Open Visual Editor</a>
               </p>
               <p>If the button above does not load, please copy and paste the link below directly into your browser:</p>
               <p><code style="background-color: #f5f5f5; padding: 6px; border-radius: 4px; font-size: 13px;">${dashboardLink}</code></p>
               <p style="margin-top: 40px; border-top: 1px solid #eee; padding-top: 20px; font-size: 14px; color: #666;">
-                Questions? Reach out directly at <a href="mailto:hello@rovexa.agency">hello@rovexa.agency</a>.
+                Questions? Reach out directly at <a href="mailto:hello@nyota.design">hello@nyota.design</a>.
               </p>
             </div>
           `
@@ -402,7 +592,7 @@ async function triggerDelivery(order) {
       if (res.ok) {
         emailSent = true;
         await db.updateNotificationStatus(order.id, 'email', true);
-        console.log(`Audit Confirmation Email successfully dispatched to ${order.email}`);
+        console.log(`Template confirmation email successfully dispatched to ${order.email}`);
       } else {
         const errText = await res.text();
         console.error('Email API response error details:', errText);
@@ -414,7 +604,7 @@ async function triggerDelivery(order) {
     // Console Sandbox mode logging
     console.log('\n--- [EMAIL SANDBOX NOTICE] ---');
     console.log(`To: ${order.email}`);
-    console.log('Subject: Your Rovexa Brand Audit dashboard is ready 🎉');
+    console.log('Subject: Your Nyota Wedding Website is ready 🎉');
     console.log(`Body Link: ${dashboardLink}`);
     console.log('------------------------------\n');
     emailSent = true;
@@ -430,7 +620,7 @@ async function triggerDelivery(order) {
       await client.messages.create({
         from: `whatsapp:${process.env.TWILIO_PHONE_NUMBER}`,
         to: `whatsapp:${formattedNum}`,
-        body: `Hi ${order.customer_name}, your Rovexa Audit workspace is active! 🎉 Track analysis progress here: ${dashboardLink} — we will contact you shortly.`
+        body: `Hi ${order.customer_name}, your Nyota workspace is active! 🎉 Access your visual editor here: ${dashboardLink}`
       });
       
       whatsappSent = true;
@@ -443,7 +633,7 @@ async function triggerDelivery(order) {
     // Console Sandbox mode logging
     console.log('\n--- [WHATSAPP SANDBOX NOTICE] ---');
     console.log(`To: ${order.whatsapp}`);
-    console.log(`Message: Hi ${order.customer_name}, your Rovexa Audit workspace is active! 🎉 Track analysis progress here: ${dashboardLink}`);
+    console.log(`Message: Hi ${order.customer_name}, your Nyota workspace is active! 🎉 Access your visual editor here: ${dashboardLink}`);
     console.log('----------------------------------\n');
     whatsappSent = true;
   }
@@ -491,7 +681,7 @@ app.post('/api/contact', async (req, res) => {
 
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`Rovexa v2 Server successfully running at: http://localhost:${PORT}`);
+    console.log(`Nyota v2 Server successfully running at: http://localhost:${PORT}`);
   });
 }
 

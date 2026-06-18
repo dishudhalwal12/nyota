@@ -3,596 +3,855 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rovexa | Creative Growth Agency for Modern Brands</title>
-  <meta name="description" content="Rovexa is a creative growth agency helping modern brands grow through branding, websites, marketing, and operational systems.">
+  <title>Nyota | Website Templates for Wedding Invites</title>
+  <meta name="description" content="Nyota replaces printed cards and shaky WhatsApp videos with a beautiful, editable wedding website your guests will actually remember.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- Razorpay SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 
-  <!-- Slide-Down Nav Overlay -->
-  <div class="nav-overlay" id="navOverlay">
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#services-focus">Focus</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#comparison">Compare</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-
   <!-- Sticky Header -->
-  <header>
-    <div class="container header-container">
-      <a href="#" class="logo-lockup" aria-label="Rovexa Home">
-        <img src="images/logo.png" alt="Rovexa Logo">
-        Rovexa<sup>®</sup>
+  <header class="main-header">
+    <div class="header-container">
+      <a href="#" class="logo-lockup" aria-label="Nyota Home">
+        <span class="logo-icon">✦</span>
+        Nyota<sup>®</sup>
       </a>
-      <div class="nav-actions">
-        <a href="#contact" class="btn-pill" id="header-cta">Get in Touch</a>
-        <button class="menu-trigger" id="menuBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
-          <span></span>
-          <span></span>
-          <span></span>
+      
+      <div class="header-actions">
+        <a href="#templates" class="btn-pill header-cta">Choose a template</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+          <span class="menu-circle">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </span>
         </button>
       </div>
     </div>
+    
+    <!-- Slide-down Mobile Navigation Overlay -->
+    <nav class="mobile-nav" id="mobileNav">
+      <div class="mobile-nav-links">
+        <a href="#templates" class="mobile-nav-link">Templates</a>
+        <a href="#how-it-works" class="mobile-nav-link">How it works</a>
+        <a href="#features" class="mobile-nav-link">Features</a>
+        <a href="#faq" class="mobile-nav-link">FAQ</a>
+        <a href="mailto:hello@nyota.design" class="mobile-nav-link">Contact</a>
+      </div>
+    </nav>
   </header>
 
-  <!-- Custom Pointer Cursor Container (Ranveer/Pinda hover) -->
-  <div class="custom-cursor-container" id="customCursor">
-    <div class="custom-cursor-avatar" id="customCursorAvatar"></div>
-    <div class="custom-cursor-label" id="customCursorLabel">Pinda</div>
+  <!-- Section 1: Hero -->
+  <section class="hero-section">
+    <div class="hero-text-block">
+      <span class="hero-eyebrow">Introducing</span>
+      <h1 class="hero-title">Website Templates for<br>Wedding Invites</h1>
+      <p class="hero-subhead">Easy to customise, effortless to share. Website templates for your big day.</p>
+      <a href="#templates" class="btn-pill hero-cta-btn">Choose a template</a>
+    </div>
+
+    <!-- Fanned Card Carousel -->
+    <div class="hero-card-fan-container">
+      <div class="hero-card-fan">
+        <!-- Card 1 -->
+        <div class="fan-card card-sunset" style="--rotation: -14deg; --y-offset: 35px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">✦</span>
+            <div class="fan-card-names">Ankit &<br>Sneha</div>
+            <div class="fan-card-details">November 14, 2026<br>Jaipur</div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="fan-card card-night" style="--rotation: -9deg; --y-offset: 15px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">❄</span>
+            <div class="fan-card-names">Karan &<br>Diya</div>
+            <div class="fan-card-details">December 05, 2026<br>Delhi</div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="fan-card card-emerald" style="--rotation: -4deg; --y-offset: 5px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">⚜</span>
+            <div class="fan-card-names">Siddharth &<br>Roshni</div>
+            <div class="fan-card-details">January 18, 2027<br>Udaipur</div>
+          </div>
+        </div>
+        <!-- Card 4 (Center - Flat) -->
+        <div class="fan-card card-royal" style="--rotation: 0deg; --y-offset: 0px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">❦</span>
+            <div class="fan-card-names">Abhishek &<br>Kanika</div>
+            <div class="fan-card-details">November 20, 2026<br>Mumbai</div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="fan-card card-lilac" style="--rotation: 4deg; --y-offset: 5px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">❁</span>
+            <div class="fan-card-names">Saurab &<br>Tamanna</div>
+            <div class="fan-card-details">February 10, 2027<br>Pune</div>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="fan-card card-teal" style="--rotation: 9deg; --y-offset: 15px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">✦</span>
+            <div class="fan-card-names">Kabir &<br>Alia</div>
+            <div class="fan-card-details">December 25, 2026<br>Goa</div>
+          </div>
+        </div>
+        <!-- Card 7 -->
+        <div class="fan-card card-terracotta" style="--rotation: 14deg; --y-offset: 35px;">
+          <div class="fan-card-inner">
+            <span class="fan-card-ornament">✵</span>
+            <div class="fan-card-names">Vikram &<br>Pooja</div>
+            <div class="fan-card-details">March 04, 2027<br>Jodhpur</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Label: New Releases -->
+  <div class="section-divider-container">
+    <hr class="section-divider">
+    <div class="section-label-badge">New Releases</div>
   </div>
 
-  <main>
-    <!-- Section 1: Hero -->
-    <section class="hero-section">
-      <!-- Floating Badge & Loop line SVG assets -->
-      <div class="flower-badge-float" style="left: 10%; top: 12%;">
-        <img src="images/logo.png" alt="Rovexa Flower Badge">
-      </div>
-      <div class="flower-badge-float" style="right: 12%; top: 22%;">
-        <img src="images/logo.png" alt="Rovexa Flower Badge">
-      </div>
-      <div class="flower-badge-float" style="right: 8%; bottom: 18%;">
-        <img src="images/logo.png" alt="Rovexa Flower Badge">
-      </div>
+  <!-- Section 2: Template Gallery -->
+  <section class="gallery-section" id="templates">
+    <div class="gallery-header">
+      <h2 class="gallery-title">Designed for your big day.<br>Easy to edit. Effortless to share.</h2>
+      <p class="gallery-subhead">Pick a style. Add your story. Share in minutes.</p>
+    </div>
 
-      <!-- Loop SVGs -->
-      <svg class="loop-svg-asset" style="left: -4%; top: 20%; width: 280px; height: 180px;" viewBox="0 0 320 200">
-        <path d="M20 130 C80 40, 150 36, 180 96 S280 170, 302 88" fill="none" />
-      </svg>
-      <svg class="loop-svg-asset" style="right: -4%; top: 24%; width: 300px; height: 200px;" viewBox="0 0 320 200">
-        <path d="M18 92 C80 24, 124 20, 184 88 S280 168, 304 90" fill="none" />
-      </svg>
-      <svg class="loop-svg-asset" style="left: 0%; bottom: 18%; width: 250px; height: 160px;" viewBox="0 0 320 200">
-        <path d="M18 42 C70 112, 120 148, 186 102 S246 26, 302 86" fill="none" />
-      </svg>
-      <svg class="loop-svg-asset" style="right: 0%; bottom: 14%; width: 250px; height: 160px;" viewBox="0 0 320 200">
-        <path d="M24 98 C76 44, 136 24, 190 84 S260 164, 304 116" fill="none" />
-      </svg>
-
-      <div class="container" style="position: relative; z-index: 2;">
-        <span class="hero-eyebrow scroll-reveal">Introducing</span>
-        <h1 class="hero-title scroll-reveal" id="heroHeading">
-          Growth ki yaad<br>
-          <span class="glow-text">nahi aayi, Jassi?</span>
-        </h1>
-        <p class="hero-subhead scroll-reveal">
-          Give me <span id="heroCountdown" style="font-weight: 700;">20:00</span> minutes with your brand and I'll show you what's been missing.
-        </p>
-        <div class="hero-ctas scroll-reveal">
-          <a href="#contact" class="btn-pill">Get in Touch</a>
-          <a href="#services" class="hero-micro-link">See what we shape</a>
-        </div>
-
-        <!-- Trusted Client social proof -->
-        <div class="hero-social-proof scroll-reveal">
-          <div class="social-proof-avatars">
-            <img src="images/pinda.png" alt="Pinda Client">
-            <img src="images/ranveer.png" alt="Ranveer Client">
-            <img src="images/element.png" alt="Client Logo">
-            <img src="images/logo.png" alt="Rovexa Logo">
-          </div>
-          <div class="social-proof-text">
-            <p class="handwriting">trusted by our clients</p>
-            <p class="stats">10+ brands grown</p>
-          </div>
-        </div>
-
-        <!-- Interactive selected focus pillars panel -->
-        <div class="selected-focus-section scroll-reveal" id="services-focus">
-          <div class="focus-pills-row">
-            <button class="focus-pill-btn active" data-pillar="marketing">Marketing</button>
-            <button class="focus-pill-btn" data-pillar="branding">Creative Branding</button>
-            <button class="focus-pill-btn" data-pillar="tech">Tech</button>
-            <button class="focus-pill-btn" data-pillar="operations">Operations &amp; Distribution</button>
-          </div>
-
-          <!-- Marketing Card -->
-          <div class="focus-panel-card active" id="pillar-marketing">
-            <span class="focus-card-meta">Selected Focus Pliiar</span>
-            <h3 class="focus-card-title">People scroll past a hundred brands a day.</h3>
-            <p class="focus-card-desc text-muted">Yours should be the one they remember, save, and send to someone else. We construct marketing setups that convert attention into sustainable volume.</p>
-            <div class="focus-details-grid">
-              <span class="focus-detail-tag">campaign strategy</span>
-              <span class="focus-detail-tag">content direction</span>
-              <span class="focus-detail-tag">smart reach</span>
-            </div>
-          </div>
-
-          <!-- Branding Card -->
-          <div class="focus-panel-card" id="pillar-branding">
-            <span class="focus-card-meta">Selected Focus Pliiar</span>
-            <h3 class="focus-card-title">First impressions do not wait around.</h3>
-            <p class="focus-card-desc text-muted">We make sure yours lands clean, fast, and hard to forget. We design premium brand languages that set you apart from competitors instantly.</p>
-            <div class="focus-details-grid">
-              <span class="focus-detail-tag">identity systems</span>
-              <span class="focus-detail-tag">art direction</span>
-              <span class="focus-detail-tag">voice and tone</span>
-            </div>
-          </div>
-
-          <!-- Tech Card -->
-          <div class="focus-panel-card" id="pillar-tech">
-            <span class="focus-card-meta">Selected Focus Pliiar</span>
-            <h3 class="focus-card-title">A slow, awkward website quietly loses clients.</h3>
-            <p class="focus-card-desc text-muted">We fix the experience before the opportunity disappears. Speed, custom integrations, and seamless user paths that guide visitors to checkouts.</p>
-            <div class="focus-details-grid">
-              <span class="focus-detail-tag">web experiences</span>
-              <span class="focus-detail-tag">conversion journeys</span>
-              <span class="focus-detail-tag">system design</span>
-            </div>
-          </div>
-
-          <!-- Operations Card -->
-          <div class="focus-panel-card" id="pillar-operations">
-            <span class="focus-card-meta">Selected Focus Pliiar</span>
-            <h3 class="focus-card-title">The best brands still miss deadlines.</h3>
-            <p class="focus-card-desc text-muted">We make sure that does not become your reputation. We streamline CRM, inventory, distribution networks, and automation pathways to let you scale cleanly.</p>
-            <div class="focus-details-grid">
-              <span class="focus-detail-tag">delivery systems</span>
-              <span class="focus-detail-tag">distribution support</span>
-              <span class="focus-detail-tag">operational flow</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section Separator Line -->
-      <div class="container">
-        <div class="section-divider-container">
-          <hr class="section-divider-line">
-          <span class="section-divider-badge">Services</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 2: Services Section -->
-    <section class="gallery-section scroll-reveal" id="services">
-      <div class="container">
-        <h2>One at a Time. Complete Growth.</h2>
-        <p class="gallery-subhead text-muted">We run deep diagnostics and execute full-funnel systems across five core growth pillars.</p>
-        
-        <!-- Services Grid -->
-        <div class="services-grid">
-          <!-- Service 1 -->
-          <div class="service-card">
-            <div>
-              <span class="service-card-num">01 / Growth</span>
-              <h3 class="service-card-title">Full Growth Strategy</h3>
-              <p class="service-card-desc">An all-in-one comprehensive brand diagnostic and execution roadmap covering marketing loops, tech stacks, visual guidelines, and operations.</p>
-              <div class="service-card-deliverables">
-                <span class="service-card-tag">Full Diagnostic</span>
-                <span class="service-card-tag">Growth Playbook</span>
-                <span class="service-card-tag">Execution Roadmap</span>
-              </div>
-            </div>
-            <a href="#contact" class="service-card-link" data-pillar-link="growth">
-              Inquire about Growth &rarr;
-            </a>
-          </div>
-
-          <!-- Service 2 -->
-          <div class="service-card">
-            <div>
-              <span class="service-card-num">02 / Marketing</span>
-              <h3 class="service-card-title">Marketing &amp; Acquisition</h3>
-              <p class="service-card-desc">Identify channel inefficiencies, audit paid marketing accounts, outline organic social loops, and design sustainable customer acquisition volume structures.</p>
-              <div class="service-card-deliverables">
-                <span class="service-card-tag">Campaign Audits</span>
-                <span class="service-card-tag">Organic Hook Systems</span>
-                <span class="service-card-tag">Acquisition Strategy</span>
-              </div>
-            </div>
-            <a href="#contact" class="service-card-link" data-pillar-link="marketing">
-              Inquire about Marketing &rarr;
-            </a>
-          </div>
-
-          <!-- Service 3 -->
-          <div class="service-card">
-            <div>
-              <span class="service-card-num">03 / Operations</span>
-              <h3 class="service-card-title">Operations &amp; Automations</h3>
-              <p class="service-card-desc">Assess backend logistics, build automation pipelines (email/CRM), streamline toolchains, and automate alerts to reduce administrative friction.</p>
-              <div class="service-card-deliverables">
-                <span class="service-card-tag">Pipeline Automation</span>
-                <span class="service-card-tag">CRM Setup</span>
-                <span class="service-card-tag">Workflow Audits</span>
-              </div>
-            </div>
-            <a href="#contact" class="service-card-link" data-pillar-link="operations">
-              Inquire about Operations &rarr;
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Reusable Divider Component -->
-      <div class="container">
-        <div class="section-divider-container">
-          <hr class="section-divider-line">
-          <span class="section-divider-badge">Process</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 4: How It Works -->
-    <section class="how-it-works-section scroll-reveal" id="how-it-works">
-      <div class="container">
-        <h2>Get Your Growth Roadmap in 3 Steps</h2>
-        <p class="section-subhead text-muted">We run high-precision diagnostics and build customized roadmap systems to scale your business.</p>
-        
-        <div class="steps-row">
-          <!-- Step 1 -->
-          <div class="step-card">
-            <span class="step-card-num">Step 1</span>
-            <h3>Request an Audit</h3>
-            <p class="text-muted">Provide your brand details and select your primary growth focus to initialize the workspace.</p>
-          </div>
-          <!-- Step 2 (Interactive Customizer Mockup!) -->
-          <div class="step-card">
-            <span class="step-card-num">Step 2</span>
-            <h3>Deep-Dive Analysis</h3>
-            <p class="text-muted" style="margin-bottom: 20px;">Our analysts diagnose your metrics and compile actionable roadmaps.</p>
-            
-            <div class="step-card-visual">
-              <div class="mock-screen">
-                <div class="mock-screen-title">
-                  <span id="preview-name1">ROVEXA</span>
-                  <span style="font-family: var(--font-body); font-style: italic; display: block; font-size: 11px; margin: 2px 0;">x</span>
-                  <span id="preview-name2">AUDIT DASHBOARD</span>
-                </div>
-              </div>
-              <div class="interactive-editor-inputs">
-                <label for="name1-customizer">Brand Target Name</label>
-                <input type="text" id="name1-customizer" value="MY BRAND" maxlength="15">
-                <label for="name2-customizer">Primary Focus Focus</label>
-                <input type="text" id="name2-customizer" value="TECH AUDIT" maxlength="15">
-              </div>
-            </div>
-          </div>
-          <!-- Step 3 -->
-          <div class="step-card">
-            <span class="step-card-num">Step 3</span>
-            <h3>Get Your Plan</h3>
-            <p class="text-muted">Access your dashboard to schedule a live review call and execute the growth playbook.</p>
-          </div>
-        </div>
-        
-        <a href="#contact" class="btn-pill">Get in Touch</a>
-      </div>
-    </section>
-
-    <!-- Section 5: Comparison Table -->
-    <section class="comparison-section scroll-reveal" id="comparison">
-      <div class="container">
-        <h2>What Traditional Agencies Can't Do (But Rovexa Can)</h2>
-        <p class="section-subhead text-muted">See how we bridge strategy and execution with complete accountability — without the overhead.</p>
-        
-        <div class="table-wrapper">
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Traditional Agencies</th>
-                <th>Freelancers</th>
-                <th>Rovexa</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="feature-col">
-                  <svg viewBox="0 0 24 24"><path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
-                  Speed
-                </td>
-                <td class="standard-col">Slow (Weeks to onboarding)</td>
-                <td class="standard-col">Variable</td>
-                <td class="nyota-col">Rapid (24hr Audits)</td>
-              </tr>
-              <tr>
-                <td class="feature-col">
-                  <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                  Core Focus
-                </td>
-                <td class="standard-col">Execution/Retainers</td>
-                <td class="standard-col">Isolated Tasks</td>
-                <td class="nyota-col">Direct growth focus</td>
-              </tr>
-              <tr>
-                <td class="feature-col">
-                  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-10 10M12 6a6 6 0 0 0-6 6M12 10a2 2 0 0 0-2 2M12 14v4M12 22v-2"></path><circle cx="12" cy="12" r="1"/></svg>
-                  Integration
-                </td>
-                <td class="standard-col">Siloed channels</td>
-                <td class="standard-col">Fragmented results</td>
-                <td class="nyota-col">All-in-one execution</td>
-              </tr>
-              <tr>
-                <td class="feature-col">
-                  <svg viewBox="0 0 24 24"><path d="M6 3h12M6 8h12M6 13h8M6 18h6M12 13c3 0 6 2.5 6 5.5s-3 5.5-6 5.5"></path></svg>
-                  Cost
-                </td>
-                <td class="standard-col">High Overhead</td>
-                <td class="standard-col">Unpredictable billing</td>
-                <td class="nyota-col">Flat service fees</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <a href="#contact" class="btn-pill">Get in Touch</a>
-      </div>
-
-      <!-- Reusable Divider Component -->
-      <div class="container">
-        <div class="section-divider-container">
-          <hr class="section-divider-line">
-          <span class="section-divider-badge">Testimonials</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 6: Testimonials -->
-    <section class="testimonials-section scroll-reveal" id="testimonials">
-      <div class="container">
-        <h2>What Real Founders and Brands Say</h2>
-        <p class="section-subhead text-muted">Simple audits. Actionable roadmaps. Real growth results.</p>
-        
-        <div class="testimonials-scroller">
-          <!-- Card 1 -->
-          <div class="testimonial-card">
-            <p class="testimonial-quote">"Rovexa transformed our branding in weeks. The detail, the strategy, the execution... it was just WHAT."</p>
-            <h4 class="testimonial-author">Aman and team</h4>
-            <span class="testimonial-relationship">Co-founder, D2C Brand</span>
-          </div>
-          <!-- Card 2 -->
-          <div class="testimonial-card">
-            <p class="testimonial-quote">"Our conversion rate jumped 40% after the tech audit. Incredible speed and clean execution."</p>
-            <h4 class="testimonial-author">Rohan Mehta</h4>
-            <span class="testimonial-relationship">Product Head</span>
-          </div>
-          <!-- Card 3 -->
-          <div class="testimonial-card">
-            <p class="testimonial-quote">"Their operations system saved us 20 hours a week in shipping logs. Rovexa is 10/10."</p>
-            <h4 class="testimonial-author">Shreya Sen</h4>
-            <span class="testimonial-relationship">Operations Lead</span>
-          </div>
-          <!-- Card 4 -->
-          <div class="testimonial-card">
-            <p class="testimonial-quote">"I've never worked with a growth partner that moves this fast and takes this much ownership."</p>
-            <h4 class="testimonial-author">Aditya Roy</h4>
-            <span class="testimonial-relationship">Founder, Fintech</span>
-          </div>
-          <!-- Card 5 -->
-          <div class="testimonial-card">
-            <p class="testimonial-quote">"Honestly, they feel like a core extension of our in-house team rather than an agency."</p>
-            <h4 class="testimonial-author">Neha Kapoor</h4>
-            <span class="testimonial-relationship">Marketing VP</span>
-          </div>
-          <!-- Card 6 -->
-          <div class="testimonial-card">
-            <p class="testimonial-quote">"Absolutely worth every rupee. The audit alone solved three major logistics bottlenecks."</p>
-            <h4 class="testimonial-author">Kabir Singh</h4>
-            <span class="testimonial-relationship">Growth Director</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 7: FAQ Accordion -->
-    <section class="faq-section scroll-reveal" id="faq">
-      <div class="container">
-        <h2>Questions? Answers.</h2>
-        
-        <div class="faq-accordion-container" id="faqContainer">
-          <!-- Accordion list generated via JS -->
-        </div>
-        
-        <button class="btn-pill" onclick="window.location.href='mailto:hello@rovexa.agency'">Any other question? Email Us</button>
-      </div>
-    </section>
-
-    <!-- Reusable Divider Component -->
-    <div class="container">
-      <div class="section-divider-container">
-        <hr class="section-divider-line">
-        <span class="section-divider-badge">Contact</span>
+    <!-- Category Filter chips -->
+    <div class="filter-container">
+      <div class="filter-chips-row">
+        <button class="filter-chip active" data-category="all">All</button>
+        <button class="filter-chip" data-category="hindu">Hindu Weddings</button>
+        <button class="filter-chip" data-category="christian">Christian Weddings</button>
+        <button class="filter-chip" data-category="sikh">Sikh Weddings</button>
+        <button class="filter-chip" data-category="muslim">Muslim Weddings</button>
+        <button class="filter-chip" data-category="south-indian">South-Indian Weddings</button>
+        <button class="filter-chip" data-category="save-date">Save the Date</button>
       </div>
     </div>
 
-    <!-- Section 7.5: Contact Section -->
-    <section class="contact-section scroll-reveal" id="contact">
-      <div class="container">
-        <div class="contact-grid">
-          <!-- Info Column -->
-          <div class="contact-info">
-            <h2>Let's scale your brand.<br><span style="color: var(--accent-color);">Together.</span></h2>
-            <p class="text-muted">Fill out the form to request a growth diagnostic or discuss a campaign project. We review every submission and get back to you within 24 hours.</p>
-            
-            <div class="contact-details">
-              <div class="contact-detail-item">
-                <div class="contact-detail-icon">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-                </div>
-                <div class="contact-detail-text">
-                  <h4>Email Us Directly</h4>
-                  <p>hello@rovexa.agency</p>
-                </div>
-              </div>
-              
-              <div class="contact-detail-item">
-                <div class="contact-detail-icon">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                </div>
-                <div class="contact-detail-text">
-                  <h4>Chat on WhatsApp</h4>
-                  <p>+91 98765 43210</p>
-                </div>
-              </div>
+    <!-- Gallery Grid -->
+    <div class="templates-grid" id="templatesGrid">
+      <!-- Cards will be dynamically rendered or filtered here -->
+    </div>
+  </section>
+
+  <!-- Section Label: Features -->
+  <div class="section-divider-container" id="features">
+    <hr class="section-divider">
+    <div class="section-label-badge">Features</div>
+  </div>
+
+  <!-- Section 3: Features (The Wedding Invite, Reinvented) -->
+  <section class="features-section">
+    <div class="features-grid">
+      <!-- Left Column (Sticky) -->
+      <div class="features-left-col">
+        <h2 class="features-title">The Wedding Invite, Reinvented.</h2>
+        <p class="features-subhead">Mobile-first, effortless to share. Costs less than printed cards, but feels far more premium.</p>
+        <a href="#templates" class="btn-pill features-cta-btn">Choose a template</a>
+      </div>
+
+      <!-- Right Column -->
+      <div class="features-right-col">
+        <!-- Feature 1 -->
+        <div class="feature-row">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+              <line x1="12" y1="4" x2="12" y2="20"></line>
+              <circle cx="12" cy="12" r="4"></circle>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <span class="feature-label">Cost</span>
+            <h3 class="feature-headline">Cheaper than most WhatsApp and printed invites *</h3>
+          </div>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="feature-row">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              <line x1="8" y1="11" x2="14" y2="11"></line>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <span class="feature-label">Elder-Friendly Design</span>
+            <h3 class="feature-headline">No more squinting at tiny, blurry WhatsApp videos</h3>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-row">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <span class="feature-label">Pre-Wedding Highlight</span>
+            <h3 class="feature-headline">Showcase your shoot like never before</h3>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-row">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <span class="feature-label">Instant Edits</span>
+            <h3 class="feature-headline">Any change? Update anything instantly, even after sharing</h3>
+          </div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-row">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <span class="feature-label">Ritual-Ready Templates</span>
+            <h3 class="feature-headline">Includes deities and editable mantras (Hindu weddings only)</h3>
+          </div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-row">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <span class="feature-label">Private Event Pages</span>
+            <h3 class="feature-headline">Invite different guests to different events</h3>
+          </div>
+        </div>
+
+        <p class="features-footnote">* Based on average printed card and premium WhatsApp video invite pricing in metro cities.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section Divider: How it Works -->
+  <div class="section-divider-container" id="how-it-works">
+    <hr class="section-divider">
+    <div class="section-label-badge">How It Works</div>
+  </div>
+
+  <!-- Section 4: How It Works -->
+  <section class="how-it-works-section">
+    <div class="section-header-centered">
+      <h2 class="section-title">Create a Stunning Wedding Invite Website in 10 Minutes</h2>
+      <p class="section-subhead">Easily change everything — text, photos, layout, colors — and make your love story the star.</p>
+    </div>
+
+    <div class="steps-row">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <span class="step-number">1</span>
+        <h3 class="step-title">Choose a template</h3>
+        <p class="step-desc">Choose a design that fits your wedding aesthetic.</p>
+      </div>
+
+      <!-- Step 2 (With Interactive Editor Mockup representation) -->
+      <div class="step-card step-card-editor">
+        <span class="step-number">2</span>
+        <h3 class="step-title">Customise & Publish</h3>
+        <p class="step-desc">Add your story, event details, hit publish.</p>
+        
+        <!-- Floating UI panel mockup -->
+        <div class="floating-ui-mockup">
+          <div class="mockup-header">
+            <span class="mockup-dot"></span>
+            <span class="mockup-dot"></span>
+            <span class="mockup-dot"></span>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-field">
+              <span>Name 1:</span>
+              <strong class="text-crimson">ABHISHEK</strong>
+            </div>
+            <div class="mockup-field">
+              <span>Name 2:</span>
+              <strong class="text-crimson">KANIKA</strong>
             </div>
           </div>
-          
-          <!-- Form Column -->
-          <div class="contact-form-card">
-            <form id="contactForm">
-              <div class="contact-form-group">
-                <label for="contactName">Your Name</label>
-                <input type="text" id="contactName" class="contact-form-input" placeholder="e.g. Jassi Gill" required>
-              </div>
-              
-              <div class="contact-form-group">
-                <label for="contactEmail">Business Email</label>
-                <input type="email" id="contactEmail" class="contact-form-input" placeholder="e.g. jassi@mybrand.com" required>
-              </div>
-              
-              <div class="contact-form-group">
-                <label for="contactWhatsapp">WhatsApp / Phone Number</label>
-                <input type="tel" id="contactWhatsapp" class="contact-form-input" placeholder="e.g. +91 98765 43210" value="+91 " required>
-              </div>
-              
-              <div class="contact-form-group">
-                <label for="contactBrand">Brand Name &amp; Website URL</label>
-                <input type="text" id="contactBrand" class="contact-form-input" placeholder="e.g. Brand Name (brand.com)" required>
-              </div>
-              
-              <div class="contact-form-group">
-                <label for="contactFocus">Primary Growth Focus</label>
-                 <select id="contactFocus" class="contact-form-select" required>
-                  <option value="" disabled selected>Select a focus area...</option>
-                  <option value="growth">Full Growth Strategy</option>
-                  <option value="marketing">Marketing &amp; Acquisition</option>
-                  <option value="operations">Operations &amp; Automations</option>
-                </select>
-              </div>
-              
-              <div class="contact-form-group">
-                <label for="contactMessage">Bottlenecks &amp; Project Scope</label>
-                <textarea id="contactMessage" class="contact-form-textarea" placeholder="Tell us about your conversion rate, ad spend, CRM workflows, or what you want us to audit..." required></textarea>
-              </div>
-              
-              <button type="submit" class="contact-form-submit-btn" id="submitBtn">Send Inquiry</button>
-            </form>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <span class="step-number">3</span>
+        <h3 class="step-title">Share anywhere</h3>
+        <p class="step-desc">Share your invite with friends and family.</p>
+      </div>
+    </div>
+
+    <div class="centered-action">
+      <a href="#templates" class="btn-pill">Choose a template</a>
+    </div>
+  </section>
+
+  <!-- Section Divider: Comparison -->
+  <div class="section-divider-container">
+    <hr class="section-divider">
+    <div class="section-label-badge">Comparison</div>
+  </div>
+
+  <!-- Section 5: Comparison Table -->
+  <section class="comparison-section">
+    <div class="section-header-centered">
+      <h2 class="section-title">What Cards and Video Invites Can't Do (But These Templates Can)</h2>
+      <p class="section-subhead">See how your invite can go from a one-time share to a lasting experience — without extra cost or hassle.</p>
+    </div>
+
+    <div class="table-responsive">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Printed Cards</th>
+            <th>WhatsApp Videos</th>
+            <th class="col-highlight">Nyota</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="row-title-with-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="table-icon">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+                Cost
+              </span>
+            </td>
+            <td class="col-muted">High</td>
+            <td class="col-muted">Moderate</td>
+            <td class="col-highlight font-bold">Low</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="row-title-with-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="table-icon">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+                Customization
+              </span>
+            </td>
+            <td class="col-muted">Limited</td>
+            <td class="col-muted">Hard</td>
+            <td class="col-highlight font-bold">Easy</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="row-title-with-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="table-icon">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+                Interactivity
+              </span>
+            </td>
+            <td class="col-muted">Static</td>
+            <td class="col-muted">View-only</td>
+            <td class="col-highlight font-bold">Responsive</td>
+          </tr>
+          <tr>
+            <td>
+              <span class="row-title-with-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="table-icon">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                Updating
+              </span>
+            </td>
+            <td class="col-muted">Impossible</td>
+            <td class="col-muted">Difficult</td>
+            <td class="col-highlight font-bold">Instant</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="centered-action" style="margin-top: 40px;">
+      <a href="#templates" class="btn-pill">Choose a template</a>
+    </div>
+  </section>
+
+  <!-- Section Divider: Testimonials -->
+  <div class="section-divider-container">
+    <hr class="section-divider">
+    <div class="section-label-badge">Testimonials</div>
+  </div>
+
+  <!-- Section 6: Testimonials -->
+  <section class="testimonials-section">
+    <div class="section-header-centered">
+      <h2 class="section-title">Don't Take Our Word for It — Here's What Real Couples Are Saying</h2>
+      <p class="section-subhead">One link. Endless compliments.</p>
+    </div>
+
+    <!-- Testimonial Horizontal Scroll View -->
+    <div class="testimonials-carousel-container">
+      <div class="testimonials-carousel">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"This invite is SO beautiful I'm lowkey jealous. The detailing, the colors, everything is so elegant. When Shweta told me it was a template she customised herself, I was like WHAT."</div>
+          <div class="testimonial-author">
+            <strong>Riya and Sai</strong>
+            <span>Bride's friends</span>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"My uncle actually called to ask 'where did you get this invite from?' That never happens."</div>
+          <div class="testimonial-author">
+            <strong>Saurab and Tamanna</strong>
+            <span>Bride and Groom</span>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"My god, I have never seen a wedding invite this pretty. Nyota = 100/10"</div>
+          <div class="testimonial-author">
+            <strong>Jatin and Monika</strong>
+            <span>Groom's sister-in-law</span>
+          </div>
+        </div>
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"\"Where did you get this invite from 😍?\" was the most common question."</div>
+          <div class="testimonial-author">
+            <strong>Amisha and Bharat</strong>
+            <span>Groom's brother and sister-in-law</span>
+          </div>
+        </div>
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"Honestly, it was actually easier than Canva, and way more premium than a WhatsApp video."</div>
+          <div class="testimonial-author">
+            <strong>Sidhant and Roshni</strong>
+            <span>Bride's friends</span>
+          </div>
+        </div>
+        <!-- Testimonial 6 -->
+        <div class="testimonial-card">
+          <div class="testimonial-quote">"Absolutely stunning. Half of our relatives saved it just to look at it again later."</div>
+          <div class="testimonial-author">
+            <strong>Karan and Diya</strong>
+            <span>Groom's cousins</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Section 8: Newsletter -->
-    <section class="newsletter-section scroll-reveal">
-      <div class="container">
-        <h2>Be the first to get our brand growth blueprints</h2>
-        <p class="section-subhead text-muted">Weekly summaries on conversion, visual languages, and CRM hacks.</p>
-        
-        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Rovexa Insights!'); this.reset();">
-          <input type="email" class="newsletter-input" placeholder="Email address" required>
-          <button type="submit" class="btn-pill">Subscribe</button>
-        </form>
+  <!-- Section Divider: FAQ -->
+  <div class="section-divider-container" id="faq">
+    <hr class="section-divider">
+    <div class="section-label-badge">FAQ</div>
+  </div>
+
+  <!-- Section 7: FAQ (All 21 Questions) -->
+  <section class="faq-section">
+    <div class="section-header-centered">
+      <h2 class="section-title">Questions? Answers.</h2>
+    </div>
+
+    <div class="faq-container">
+      <!-- FAQ Accordions -->
+      <div class="faq-accordion-list">
+        <!-- Q1 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need any software to edit these templates?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Everything is edited directly in your browser through a simple visual editor — no design software or coding required.</p>
+          </div>
+        </div>
+        <!-- Q2 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Will this open like a website?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes. Every template becomes a real, mobile-friendly website with its own shareable link.</p>
+          </div>
+        </div>
+        <!-- Q3 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What if I want to split guests by event?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>You can create private event pages and share different links with different guest groups — for example, a separate page for the sangeet versus the wedding ceremony.</p>
+          </div>
+        </div>
+        <!-- Q4 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I get started?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Pick a template, complete payment, and you'll get instant access to the editor to start customising.</p>
+          </div>
+        </div>
+        <!-- Q5 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How long does it take to edit the invite?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Most couples finish customising in under 15 minutes — just add your names, photos, and event details.</p>
+          </div>
+        </div>
+        <!-- Q6 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What happens after I buy the template?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>You'll receive an editor link by email where you can personalise your invite and publish it whenever you're ready.</p>
+          </div>
+        </div>
+        <!-- Q7 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I purchase now and use it later?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, your template and editor access don't expire — customise and publish whenever you're ready.</p>
+          </div>
+        </div>
+        <!-- Q8 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I purchase it using my phone?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, the entire purchase and editing experience works smoothly on mobile.</p>
+          </div>
+        </div>
+        <!-- Q9 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Is there an expiry to the template?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No, once purchased, your invite stays live and editable for as long as you need it.</p>
+          </div>
+        </div>
+        <!-- Q10 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Will I need to buy a domain name?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No. Every invite comes with a free shareable link — a custom domain is optional, not required.</p>
+          </div>
+        </div>
+        <!-- Q11 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I add my details in the template?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Simply click on any text, photo, or section in the editor and replace it with your own details.</p>
+          </div>
+        </div>
+        <!-- Q12 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I add music?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, most templates support a background audio track that plays when guests open your invite.</p>
+          </div>
+        </div>
+        <!-- Q13 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What's included in the template?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Each template includes the full website design, editable text and photo sections, and a free shareable link.</p>
+          </div>
+        </div>
+        <!-- Q14 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do I need to know coding to use this?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Not at all. The editor is fully visual — point, click, and type.</p>
+          </div>
+        </div>
+        <!-- Q15 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I share this with my guests?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Once published, you'll get a single link you can share over WhatsApp, SMS, or email.</p>
+          </div>
+        </div>
+        <!-- Q16 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do my guests view the invite?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>They simply open the link in their browser — no app download required.</p>
+          </div>
+        </div>
+        <!-- Q17 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I preview before I share it?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, you can preview your finished invite as many times as you like before sharing.</p>
+          </div>
+        </div>
+        <!-- Q18 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I make changes after sharing?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, any edits you make update instantly, even on links you've already shared.</p>
+          </div>
+        </div>
+        <!-- Q19 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Do you make custom invites?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Currently we focus on ready-to-edit templates, but reach out if you have a custom request.</p>
+          </div>
+        </div>
+        <!-- Q20 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can I re-sell these templates?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>No, templates are licensed for personal use for your own event only.</p>
+          </div>
+        </div>
+        <!-- Q21 -->
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>What's the refund policy?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Since access is granted instantly, we don't offer refunds once the editor link has been delivered — please review the template preview carefully before purchasing.</p>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+
+    <div class="centered-action" style="margin-top: 40px;">
+      <a href="mailto:hello@nyota.design" class="btn-pill">Any other question? Email Us</a>
+    </div>
+  </section>
+
+  <!-- Section Divider: Newsletter -->
+  <div class="section-divider-container">
+    <hr class="section-divider">
+    <div class="section-label-badge">Stay Updated</div>
+  </div>
+
+  <!-- Section 8: Newsletter -->
+  <section class="newsletter-section">
+    <div class="section-header-centered">
+      <h2 class="section-title">Be the first to know when a new template drops</h2>
+      <p class="section-subhead">Stay updated on new templates and feature releases.</p>
+    </div>
+    
+    <div class="newsletter-form-container">
+      <form class="newsletter-form" id="newsletterForm">
+        <div class="newsletter-input-group">
+          <input type="email" placeholder="Email address" required class="newsletter-underline-input">
+        </div>
+        <button type="submit" class="btn-pill">Subscribe</button>
+      </form>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer>
-    <div class="container footer-grid">
-      <!-- Col 1 -->
-      <div class="footer-col-1">
-        <h2 class="footer-brand-title">Growth agency that helps brands grow.</h2>
+  <footer class="main-footer">
+    <div class="footer-grid">
+      <!-- Column 1 -->
+      <div class="footer-col col-brand">
+        <h3 class="footer-brand-title">Website Templates<br>for Wedding Invites</h3>
       </div>
       
-      <!-- Col 2 -->
-      <div class="footer-col-2">
-        <h4>Need any help?</h4>
-        <p class="text-muted">We've got your back. Email us at:</p>
-        <a href="mailto:hello@rovexa.agency" class="footer-email">hello@rovexa.agency</a>
-        <div class="social-links">
-          <a href="#" class="social-icon-btn" aria-label="Instagram">
-            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051C.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      <!-- Column 2 -->
+      <div class="footer-col col-support">
+        <p class="support-title">Need any help? We've got your back.</p>
+        <a href="mailto:hello@nyota.design" class="support-email">hello@nyota.design</a>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram" class="social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
           </a>
-          <a href="#" class="social-icon-btn" aria-label="YouTube">
-            <svg viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.107C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.388.511a3.002 3.002 0 0 0-2.11 2.107C0 8.047 0 12 0 12s0 3.953.502 5.837a3.002 3.002 0 0 0 2.11 2.107C4.495 20.455 12 20.455 12 20.455s7.505 0 9.388-.511a3.002 3.002 0 0 0 2.11-2.107C24 15.953 24 12 24 12s0-3.953-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          <a href="#" aria-label="YouTube" class="social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+              <polyline points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polyline>
+            </svg>
           </a>
         </div>
       </div>
-      
-      <!-- Col 3 -->
-      <div class="footer-col-3">
-        <h4>Information</h4>
-        <ul class="footer-links-list">
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Work</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms</a></li>
-        </ul>
+
+      <!-- Column 3 -->
+      <div class="footer-col col-links">
+        <h4 class="footer-subheading">Information</h4>
+        <div class="footer-links-list">
+          <a href="#">About Us</a>
+          <a href="#">Contact us</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Refund Policy</a>
+          <a href="#">Terms</a>
+        </div>
       </div>
-      
-      <!-- Col 4 -->
-      <div class="footer-col-4">
-        <div class="footer-cta-card">
-          <h3>Get in Touch with Our Team!</h3>
-          <p class="text-muted">Let's discuss your brand bottlenecks.</p>
-          <a href="#contact" class="btn-pill">Get in Touch</a>
-          <div class="footer-card-illus">
-            <!-- Sleek abstract growth arrow outline -->
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="45" fill="rgba(208, 0, 0, 0.08)"/>
-              <path d="M25 75L75 25M75 25H45M75 25V55" fill="none" stroke="#D00000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Elegant brand flower outline -->
-              <circle cx="45" cy="55" r="10" fill="none" stroke="#0A0A0A" stroke-width="2"/>
+
+      <!-- Column 4 (Bordered Mini CTA Card) -->
+      <div class="footer-col col-cta-card">
+        <div class="mini-cta-card">
+          <div class="mini-cta-card-content">
+            <h4 class="mini-card-title">Invite Your Guests<br>in 10 Minutes!</h4>
+            <p class="mini-card-subhead">Choose. Customise. Share.</p>
+            <a href="#templates" class="btn-pill mini-card-btn">Choose a template</a>
+          </div>
+          <!-- Traditional Couple Illustration SVG placeholder -->
+          <div class="mini-card-couple-illustration">
+            <svg viewBox="0 0 100 120" fill="none" class="couple-svg">
+              <path d="M25 120c0-20 8-35 25-35s25 15 25 35H25z" fill="#EAEAEA"></path>
+              <circle cx="35" cy="50" r="10" fill="#0E0E0E"></circle>
+              <circle cx="65" cy="53" r="9" fill="#0E0E0E"></circle>
+              <!-- Traditional Indian headgear/dupatta accent colors -->
+              <path d="M28 42c3-8 11-8 14 0l-7-3-7 3z" fill="#D00000"></path>
+              <path d="M56 46c4-12 14-8 18 0l-9-4-9 4z" fill="#D4AF37"></path>
             </svg>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- Footer Bottom Bar -->
-    <div class="container footer-bottom">
-      <div class="footer-bottom-left">
-        <span class="logo-star" style="width: 16px; height: 16px;">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-            <path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/>
-          </svg>
-        </span>
-        <span>© Rovexa 2026</span>
-      </div>
-      <div class="footer-bottom-right">
-        <span>Grow beautifully.</span>
-        <span class="logo-star">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 0L14.7 9.3L24 12L14.7 14.7L12 24L9.3 14.7L0 12L9.3 9.3L12 0Z"/>
-          </svg>
-        </span>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-container">
+        <div class="footer-logo-mark">✦</div>
+        <span>© Nyota 2026</span>
+        <div class="footer-logo-repeated">✦ Nyota</div>
       </div>
     </div>
   </footer>
 
-  <!-- Interaction Layer Script -->
+  <!-- Checkout/Purchase Modal -->
+  <div class="checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="checkout-modal-backdrop" id="modalBackdrop"></div>
+    <div class="checkout-modal-content">
+      <button class="checkout-modal-close" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      
+      <div class="checkout-modal-header">
+        <h3 id="modalTitle">Customise & Order Template</h3>
+        <p class="modal-subhead" id="modalTemplateName">Template: Mandap</p>
+      </div>
+      
+      <form class="checkout-form" id="checkoutForm">
+        <div class="checkout-form-group">
+          <label for="custName">Your Name</label>
+          <input type="text" id="custName" required placeholder="e.g. Abhishek" class="checkout-input">
+        </div>
+        <div class="checkout-form-group">
+          <label for="custEmail">Email Address</label>
+          <input type="email" id="custEmail" required placeholder="e.g. abhishek@gmail.com" class="checkout-input">
+        </div>
+        <div class="checkout-form-group">
+          <label for="custWhatsapp">WhatsApp Number</label>
+          <input type="tel" id="custWhatsapp" required placeholder="e.g. +91 9876543210" class="checkout-input">
+        </div>
+        <div class="checkout-form-group">
+          <label for="eventTitle">Wedding Venue / Event Title</label>
+          <input type="text" id="eventTitle" required placeholder="e.g. The Leela Palace, Udaipur" class="checkout-input">
+        </div>
+        
+        <div class="price-summary-box">
+          <div class="price-row">
+            <span>Template Price:</span>
+            <strong id="modalTemplatePrice">₹3,499</strong>
+          </div>
+        </div>
+        
+        <button type="submit" class="btn-pill checkout-submit-btn" id="payButton">
+          Proceed to Customize (Pay Now)
+        </button>
+      </form>
+    </div>
+  </div>
+
   <script src="main.js"></script>
 </body>
 </html>
