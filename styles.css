@@ -1057,12 +1057,12 @@ a {
   justify-content: center;
   gap: 24px;
   margin-top: 48px;
-  max-h: 740px;
+  height: 680px; /* Explicit height to display exactly a 3-high card grid */
   overflow: hidden;
   position: relative;
   width: 100%;
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
 }
 
 .testimonials-marquee-container {
@@ -1071,7 +1071,8 @@ a {
   gap: 24px;
   width: 100%;
   max-width: 1080px;
-  padding: 20px 0;
+  height: 100%;
+  padding: 10px 0;
 }
 
 .testimonials-col {
@@ -1080,6 +1081,7 @@ a {
   overflow: hidden;
   flex: 1;
   max-width: 340px;
+  height: 100%;
 }
 
 .testimonials-col.col-2 {
