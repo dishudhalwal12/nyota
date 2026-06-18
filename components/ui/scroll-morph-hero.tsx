@@ -273,7 +273,7 @@ export default function IntroAnimation() {
                         transition={{ duration: 1 }}
                         className="text-2xl font-medium tracking-tight text-gray-800 md:text-4xl"
                     >
-                        The future is built on AI.
+                        ✦ Nyota
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
