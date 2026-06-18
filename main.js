@@ -548,9 +548,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => { introPhase = "line"; }, 500);
     setTimeout(() => {
       introPhase = "circle";
-      if (heroAwardBadge) {
-        heroAwardBadge.classList.add('revealed');
-      }
     }, 2500);
 
     // 6. Define Scatter Positions
@@ -613,9 +610,15 @@ document.addEventListener('DOMContentLoaded', () => {
           const t = (morphValue - 0.8) / 0.2; // 0 to 1
           activeContentBlock.style.opacity = t;
           activeContentBlock.style.transform = `translateY(${lerp(20, 0, t)}px)`;
+          if (heroAwardBadge && !heroAwardBadge.classList.contains('revealed')) {
+            heroAwardBadge.classList.add('revealed');
+          }
         } else {
           activeContentBlock.style.opacity = 0;
           activeContentBlock.style.transform = "translateY(20px)";
+          if (heroAwardBadge) {
+            heroAwardBadge.classList.remove('revealed');
+          }
         }
       }
 

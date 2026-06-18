@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, useTransform, useSpring, useMotionValue } from "framer-motion";
+import { AwardBadge } from "./award-badge";
 
 // --- Types ---
 export type AnimationPhase = "scatter" | "line" | "circle" | "bottom-strip";
@@ -267,6 +268,14 @@ export default function IntroAnimation() {
 
                 {/* Intro Text (Fades out) */}
                 <div className="absolute z-0 flex flex-col items-center justify-center text-center pointer-events-none top-1/2 -translate-y-1/2">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                        animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 1 - morphValue * 2, y: 0, filter: "blur(0px)" } : { opacity: 0, filter: "blur(10px)" }}
+                        transition={{ duration: 1 }}
+                        className="text-2xl font-medium tracking-tight text-gray-800 md:text-4xl"
+                    >
+                        Nyota
+                    </motion.h1>
                     <motion.p
                         initial={{ opacity: 0 }}
                         animate={introPhase === "circle" && morphValue < 0.5 ? { opacity: 0.5 - morphValue } : { opacity: 0 }}
@@ -280,14 +289,14 @@ export default function IntroAnimation() {
                 {/* Arc Active Content (Fades in) */}
                 <motion.div
                     style={{ opacity: contentOpacity, y: contentY }}
-                    className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center pointer-events-none px-4"
+                    className="absolute top-[10%] z-10 flex flex-col items-center justify-center text-center px-4"
                 >
-                    <h2 className="text-3xl md:text-5xl font-semibold text-gray-900 tracking-tight mb-4">
-                        Explore Our Vision
-                    </h2>
+                    <div className="mb-4">
+                        <AwardBadge type="nyota-best" link="#templates" />
+                    </div>
                     <p className="text-sm md:text-base text-gray-600 max-w-lg leading-relaxed">
-                        Discover a world where technology meets creativity. <br className="hidden md:block" />
-                        Scroll through our curated collection of innovations designed to shape the future.
+                        Website Templates for Wedding Invites. <br className="hidden md:block" />
+                        Easy to customise, effortless to share. Made for your big day.
                     </p>
                 </motion.div>
 
