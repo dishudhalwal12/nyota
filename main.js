@@ -699,4 +699,195 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(tick);
     });
   }
+
+  // --- 8. Interactive Holographic Award Badge ---
+  const awardBadge = document.getElementById('heroAwardBadge');
+  const badgeCard = document.getElementById('badgeCard');
+
+  if (awardBadge && badgeCard) {
+    const holoGroups = badgeCard.querySelectorAll('.holo-group > g');
+    
+    const identityMatrix = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+    let matrixValues = [...identityMatrix];
+    let currentMatrixValues = [...identityMatrix];
+    
+    let firstOverlayPosition = 0;
+    let isTimeoutFinished = false;
+    let enterTimeout = null;
+    let leaveTimeout1 = null;
+    let leaveTimeout2 = null;
+    let leaveTimeout3 = null;
+    let isHovering = false;
+
+    const maxRotate = 0.25;
+    const minRotate = -0.25;
+    const maxScale = 1;
+    const minScale = 0.97;
+
+    function getDimensions() {
+      const rect = awardBadge.getBoundingClientRect();
+      return {
+        left: rect.left + window.scrollX,
+        right: rect.right + window.scrollX,
+        top: rect.top + window.scrollY,
+        bottom: rect.bottom + window.scrollY
+      };
+    }
+
+    function getMatrix(clientX, clientY) {
+      const { left, right, top, bottom } = getDimensions();
+      const xCenter = (left + right) / 2;
+      const yCenter = (top + bottom) / 2;
+
+      const px = clientX + window.scrollX;
+      const py = clientY + window.scrollY;
+
+      const scaleX = maxScale - (maxScale - minScale) * Math.abs(xCenter - px) / (xCenter - left);
+      const scaleY = maxScale - (maxScale - minScale) * Math.abs(yCenter - py) / (yCenter - top);
+      const scaleTotal = maxScale - (maxScale - minScale) * (Math.abs(xCenter - px) + Math.abs(yCenter - py)) / (xCenter - left + yCenter - top);
+
+      const rotate = {
+        x1: 0.25 * ((yCenter - py) / yCenter - (xCenter - px) / xCenter),
+        x2: maxRotate - (maxRotate - minRotate) * Math.abs(right - px) / (right - left),
+        x3: 0,
+        y0: 0,
+        y2: maxRotate - (maxRotate - minRotate) * (top - py) / (top - bottom),
+        y3: 0,
+        z0: -(maxRotate - (maxRotate - minRotate) * Math.abs(right - px) / (right - left)),
+        z1: (0.2 - (0.2 + 0.6) * (top - py) / (top - bottom)),
+        z3: 0
+      };
+
+      return [
+        scaleX, rotate.y0, rotate.z0, 0,
+        rotate.x1, scaleY, rotate.z1, 0,
+        rotate.x2, rotate.y2, scaleTotal, 0,
+        rotate.x3, rotate.y3, rotate.z3, 1
+      ];
+    }
+
+    function getOppositeMatrix(matrixArr, clientY, onMouseEnter = false) {
+      const { top, bottom } = getDimensions();
+      const py = clientY + window.scrollY;
+      const oppositeY = bottom - py + top;
+      const weakening = onMouseEnter ? 0.7 : 4;
+      const multiplier = onMouseEnter ? -1 : 1;
+
+      return matrixArr.map((item, index) => {
+        if (index === 2 || index === 4 || index === 8) {
+          return -item * multiplier / weakening;
+        } else if (index === 0 || index === 5 || index === 10) {
+          return 1;
+        } else if (index === 6) {
+          return multiplier * (maxRotate - (maxRotate - minRotate) * (top - oppositeY) / (top - bottom)) / weakening;
+        } else if (index === 9) {
+          return (maxRotate - (maxRotate - minRotate) * (top - oppositeY) / (top - bottom)) / weakening;
+        }
+        return item;
+      });
+    }
+
+    function updateHologramPositions(pos, disableTransition = false) {
+      holoGroups.forEach((g, idx) => {
+        g.style.transition = disableTransition ? 'none' : 'transform 200ms ease-out';
+        g.style.transform = `rotate(${pos + idx * 10}deg)`;
+        g.style.transformOrigin = 'center center';
+      });
+    }
+
+    awardBadge.addEventListener('mouseenter', (e) => {
+      isHovering = true;
+      if (leaveTimeout1) clearTimeout(leaveTimeout1);
+      if (leaveTimeout2) clearTimeout(leaveTimeout2);
+      if (leaveTimeout3) clearTimeout(leaveTimeout3);
+
+      holoGroups.forEach(g => {
+        g.style.animation = 'none';
+      });
+
+      const { left, right, top, bottom } = getDimensions();
+      const xCenter = (left + right) / 2;
+      const yCenter = (top + bottom) / 2;
+      const px = e.clientX + window.scrollX;
+      const py = e.clientY + window.scrollY;
+
+      requestAnimationFrame(() => {
+        firstOverlayPosition = (Math.abs(xCenter - px) + Math.abs(yCenter - py)) / 1.5;
+        updateHologramPositions(firstOverlayPosition);
+      });
+
+      const activeMatrix = getMatrix(e.clientX, e.clientY);
+      matrixValues = getOppositeMatrix(activeMatrix, e.clientY, true);
+      
+      badgeCard.style.transition = 'transform 200ms ease-out';
+      badgeCard.style.transform = `perspective(700px) matrix3d(${matrixValues.join(', ')})`;
+
+      isTimeoutFinished = false;
+      if (enterTimeout) clearTimeout(enterTimeout);
+      enterTimeout = setTimeout(() => {
+        isTimeoutFinished = true;
+      }, 200);
+    });
+
+    awardBadge.addEventListener('mousemove', (e) => {
+      if (!isHovering) return;
+      const { left, right, top, bottom } = getDimensions();
+      const xCenter = (left + right) / 2;
+      const yCenter = (top + bottom) / 2;
+      const px = e.clientX + window.scrollX;
+      const py = e.clientY + window.scrollY;
+
+      setTimeout(() => {
+        if (!isHovering) return;
+        firstOverlayPosition = (Math.abs(xCenter - px) + Math.abs(yCenter - py)) / 1.5;
+        updateHologramPositions(firstOverlayPosition, true);
+      }, 150);
+
+      if (isTimeoutFinished) {
+        currentMatrixValues = getMatrix(e.clientX, e.clientY);
+        matrixValues = currentMatrixValues;
+        badgeCard.style.transition = 'transform 100ms ease-out';
+        badgeCard.style.transform = `perspective(700px) matrix3d(${matrixValues.join(', ')})`;
+      }
+    });
+
+    awardBadge.addEventListener('mouseleave', (e) => {
+      isHovering = false;
+      const oppositeMatrix = getOppositeMatrix(matrixValues, e.clientY);
+
+      if (enterTimeout) clearTimeout(enterTimeout);
+
+      matrixValues = oppositeMatrix;
+      badgeCard.style.transition = 'transform 200ms ease-out';
+      badgeCard.style.transform = `perspective(700px) matrix3d(${matrixValues.join(', ')})`;
+
+      setTimeout(() => {
+        if (isHovering) return;
+        badgeCard.style.transform = `perspective(700px) matrix3d(${identityMatrix.join(', ')})`;
+      }, 200);
+
+      requestAnimationFrame(() => {
+        leaveTimeout1 = setTimeout(() => {
+          if (isHovering) return;
+          firstOverlayPosition = -firstOverlayPosition / 4;
+          updateHologramPositions(firstOverlayPosition);
+        }, 150);
+
+        leaveTimeout2 = setTimeout(() => {
+          if (isHovering) return;
+          firstOverlayPosition = 0;
+          updateHologramPositions(firstOverlayPosition);
+        }, 300);
+
+        leaveTimeout3 = setTimeout(() => {
+          if (isHovering) return;
+          holoGroups.forEach((g, idx) => {
+            g.style.animation = `overlayAnimation${idx + 1} 5s infinite`;
+            g.style.transition = 'none';
+            g.style.transform = '';
+          });
+        }, 500);
+      });
+    });
+  }
 });

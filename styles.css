@@ -1530,3 +1530,105 @@ a {
   margin-top: 10px;
   padding: 14px;
 }
+
+/* Award Badge (Holographic Card) Styles */
+.award-badge {
+  display: block;
+  width: 180px;
+  height: auto;
+  margin-bottom: 24px;
+  cursor: pointer;
+  perspective: 700px;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .award-badge {
+    width: 260px;
+    margin-bottom: 32px;
+  }
+}
+
+.award-badge-card {
+  width: 100%;
+  height: auto;
+  transform-style: preserve-3d;
+  transform: perspective(700px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+  transform-origin: center center;
+  transition: transform 200ms ease-out;
+}
+
+.award-badge-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Hologram keyframes configuration */
+.holo-poly {
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.holo-poly-1 { animation: overlayAnimation1 5s infinite; }
+.holo-poly-2 { animation: overlayAnimation2 5s infinite; }
+.holo-poly-3 { animation: overlayAnimation3 5s infinite; }
+.holo-poly-4 { animation: overlayAnimation4 5s infinite; }
+.holo-poly-5 { animation: overlayAnimation5 5s infinite; }
+.holo-poly-6 { animation: overlayAnimation6 5s infinite; }
+.holo-poly-7 { animation: overlayAnimation7 5s infinite; }
+.holo-poly-8 { animation: overlayAnimation8 5s infinite; }
+.holo-poly-9 { animation: overlayAnimation9 5s infinite; }
+.holo-poly-10 { animation: overlayAnimation10 5s infinite; }
+
+@keyframes overlayAnimation1 {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(10deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes overlayAnimation2 {
+  0% { transform: rotate(10deg); }
+  50% { transform: rotate(20deg); }
+  100% { transform: rotate(10deg); }
+}
+@keyframes overlayAnimation3 {
+  0% { transform: rotate(20deg); }
+  50% { transform: rotate(30deg); }
+  100% { transform: rotate(20deg); }
+}
+@keyframes overlayAnimation4 {
+  0% { transform: rotate(30deg); }
+  50% { transform: rotate(40deg); }
+  100% { transform: rotate(30deg); }
+}
+@keyframes overlayAnimation5 {
+  0% { transform: rotate(40deg); }
+  50% { transform: rotate(50deg); }
+  100% { transform: rotate(40deg); }
+}
+@keyframes overlayAnimation6 {
+  0% { transform: rotate(50deg); }
+  50% { transform: rotate(60deg); }
+  100% { transform: rotate(50deg); }
+}
+@keyframes overlayAnimation7 {
+  0% { transform: rotate(60deg); }
+  50% { transform: rotate(70deg); }
+  100% { transform: rotate(60deg); }
+}
+@keyframes overlayAnimation8 {
+  0% { transform: rotate(70deg); }
+  50% { transform: rotate(80deg); }
+  100% { transform: rotate(70deg); }
+}
+@keyframes overlayAnimation9 {
+  0% { transform: rotate(80deg); }
+  50% { transform: rotate(90deg); }
+  100% { transform: rotate(80deg); }
+}
+@keyframes overlayAnimation10 {
+  0% { transform: rotate(90deg); }
+  50% { transform: rotate(100deg); }
+  100% { transform: rotate(90deg); }
+}
