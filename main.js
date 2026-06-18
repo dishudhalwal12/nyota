@@ -12,10 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add scroll listener for sticky header background blur
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      mainHeader.classList.add('scrolled');
+    const heroScrollTrack = document.getElementById('heroScrollTrack');
+    if (heroScrollTrack) {
+      const heroHeight = heroScrollTrack.offsetHeight;
+      if (window.scrollY > heroHeight - 80) {
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
     } else {
-      mainHeader.classList.remove('scrolled');
+      if (window.scrollY > 20) {
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
     }
   });
 
