@@ -559,6 +559,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Initialize Springs
     const scrollSpring = new RobustSpringSolver(0, 0.7, 0.95); // Damped luxury scroll inertia
     const parallaxSpring = new RobustSpringSolver(0, 1.0, 1.0); // Critically damped parallax
+    const introOpacitySpring = new RobustSpringSolver(0, 1.0, 1.0); // Intro text fade solver
 
     const cardSprings = HERO_IMAGES.map((_, idx) => ({
       x: new RobustSpringSolver(scatterPositions[idx].x, 1.3, 0.90),
@@ -587,18 +588,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const morphValue = Math.min(Math.max(smoothedScroll / 600, 0), 1);
       const rotateValue = smoothedScroll > 600 ? ((smoothedScroll - 600) / 2400) * 360 : 0;
 
-      // Update intro text and active content opacity
+      // Update intro text spring target (calculated after morphValue is updated)
+      if (introPhase === "circle" && morphValue < 0.5) {
+        introOpacitySpring.target = Math.max(1 - morphValue * 2, 0);
+      } else {
+        introOpacitySpring.target = 0;
+      }
+      const introOpacity = introOpacitySpring.update(dt);
+
+      // Update intro text opacity
       if (introTextBlock) {
-        if (introPhase === "circle" && morphValue < 0.5) {
-          introTextBlock.style.opacity = Math.max(1 - morphValue * 2, 0);
-          introTextBlock.style.filter = `blur(${morphValue * 10}px)`;
-        } else if (introPhase === "circle" && morphValue >= 0.5) {
-          introTextBlock.style.opacity = 0;
-          introTextBlock.style.filter = "blur(10px)";
-        } else {
-          introTextBlock.style.opacity = 1;
-          introTextBlock.style.filter = "blur(0px)";
-        }
+        introTextBlock.style.opacity = introOpacity;
+        introTextBlock.style.filter = `blur(${(1 - introOpacity) * 10}px)`;
       }
 
       if (activeContentBlock) {

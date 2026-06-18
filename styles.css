@@ -273,7 +273,7 @@ a {
 
 .intro-text-block {
   position: absolute;
-  z-index: 5;
+  z-index: 20;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -284,7 +284,6 @@ a {
   transform: translateY(-50%);
   width: 100%;
   padding: 0 24px;
-  transition: opacity 0.15s ease-out;
 }
 
 .intro-title {
