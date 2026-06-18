@@ -215,6 +215,21 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    // Add event listeners to eye preview buttons
+    document.querySelectorAll('.eye-preview-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = e.target.closest('.template-card');
+        if (card) {
+          const ctaBtn = card.querySelector('.template-select-cta');
+          if (ctaBtn) {
+            const templateId = ctaBtn.getAttribute('data-template-id');
+            openCheckoutModal(templateId);
+          }
+        }
+      });
+    });
+
   }
 
   // Initial gallery rendering
