@@ -438,18 +438,29 @@ document.addEventListener('DOMContentLoaded', () => {
     "https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?w=300&q=80"
   ];
 
-  class SpringSolver {
-    constructor(initialValue, stiffness = 0.04, damping = 0.12) {
+  class RobustSpringSolver {
+    constructor(initialValue, frequency = 1.5, dampingRatio = 0.85) {
       this.current = initialValue;
       this.target = initialValue;
       this.velocity = 0;
-      this.stiffness = stiffness;
-      this.damping = damping;
+      this.frequency = frequency;
+      this.dampingRatio = dampingRatio;
     }
-    update() {
-      let force = (this.target - this.current) * this.stiffness;
-      this.velocity += force - this.velocity * this.damping;
-      this.current += this.velocity;
+    update(dt) {
+      if (this.frequency <= 0) {
+        this.current = this.target;
+        this.velocity = 0;
+        return this.current;
+      }
+      const w0 = this.frequency * 2 * Math.PI;
+      const damping = 2 * this.dampingRatio * w0;
+      const subSteps = 4;
+      const h = dt / subSteps;
+      for (let i = 0; i < subSteps; i++) {
+        const acceleration = - (w0 * w0) * (this.current - this.target) - damping * this.velocity;
+        this.velocity += acceleration * h;
+        this.current += this.velocity * h;
+      }
       return this.current;
     }
   }
@@ -536,22 +547,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     // 7. Initialize Springs
-    const scrollSpring = new SpringSolver(0, 0.015, 0.10); // Root scroll smoother
-    const parallaxSpring = new SpringSolver(0, 0.02, 0.10); // Mouse parallax smoother
+    const scrollSpring = new RobustSpringSolver(0, 0.7, 0.95); // Damped luxury scroll inertia
+    const parallaxSpring = new RobustSpringSolver(0, 1.0, 1.0); // Critically damped parallax
 
     const cardSprings = HERO_IMAGES.map((_, idx) => ({
-      x: new SpringSolver(scatterPositions[idx].x, 0.025, 0.14),
-      y: new SpringSolver(scatterPositions[idx].y, 0.025, 0.14),
-      rotation: new SpringSolver(scatterPositions[idx].rotation, 0.025, 0.14),
-      scale: new SpringSolver(0.6, 0.025, 0.14),
-      opacity: new SpringSolver(0, 0.025, 0.14)
+      x: new RobustSpringSolver(scatterPositions[idx].x, 1.3, 0.90),
+      y: new RobustSpringSolver(scatterPositions[idx].y, 1.3, 0.90),
+      rotation: new RobustSpringSolver(scatterPositions[idx].rotation, 1.0, 0.85),
+      scale: new RobustSpringSolver(0.6, 1.0, 0.85),
+      opacity: new RobustSpringSolver(0, 1.2, 1.0)
     }));
 
     // 8. Animation Loop
-    function tick() {
+    let lastTime = 0;
+    function tick(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const dt = Math.min((timestamp - lastTime) / 1000, 0.1); // in seconds, capped at 100ms
+      lastTime = timestamp;
+
       // Update general springs
-      const smoothedScroll = scrollSpring.update();
-      const parallaxValue = parallaxSpring.update();
+      const smoothedScroll = scrollSpring.update(dt);
+      const parallaxValue = parallaxSpring.update(dt);
 
       // Set targets
       scrollSpring.target = virtualScroll;
@@ -653,11 +669,11 @@ document.addEventListener('DOMContentLoaded', () => {
         springs.scale.target = target.scale;
         springs.opacity.target = target.opacity;
 
-        const currentX = springs.x.update();
-        const currentY = springs.y.update();
-        const currentRot = springs.rotation.update();
-        const currentScale = springs.scale.update();
-        const currentOpacity = springs.opacity.update();
+        const currentX = springs.x.update(dt);
+        const currentY = springs.y.update(dt);
+        const currentRot = springs.rotation.update(dt);
+        const currentScale = springs.scale.update(dt);
+        const currentOpacity = springs.opacity.update(dt);
 
         card.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${currentRot}deg) scale(${currentScale})`;
         card.style.opacity = currentOpacity;
@@ -665,6 +681,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       requestAnimationFrame(tick);
     }
-    requestAnimationFrame(tick);
+
+    // Bootstrap first frame
+    requestAnimationFrame((timestamp) => {
+      lastTime = timestamp;
+      requestAnimationFrame(tick);
+    });
   }
 });

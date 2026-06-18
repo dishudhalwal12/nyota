@@ -388,7 +388,7 @@ a {
   perspective: 1000px;
   cursor: pointer;
   pointer-events: auto;
-  transition: opacity 0.3s ease;
+  will-change: transform, opacity;
 }
 
 .morph-card-inner {
