@@ -51,77 +51,30 @@
     </nav>
   </header>
 
-  <!-- Section 1: Hero -->
-  <section class="hero-section">
-    <div class="hero-text-block">
-      <span class="hero-eyebrow">Introducing</span>
-      <h1 class="hero-title">Website Templates for<br>Wedding Invites</h1>
-      <p class="hero-subhead">Easy to customise, effortless to share. Website templates for your big day.</p>
-      <a href="#templates" class="btn-pill hero-cta-btn">Choose a template</a>
-    </div>
-
-    <!-- Fanned Card Carousel -->
-    <div class="hero-card-fan-container">
-      <div class="hero-card-fan">
-        <!-- Card 1 -->
-        <div class="fan-card card-sunset" style="--rotation: -14deg; --y-offset: 35px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">✦</span>
-            <div class="fan-card-names">Ankit &<br>Sneha</div>
-            <div class="fan-card-details">November 14, 2026<br>Jaipur</div>
-          </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="fan-card card-night" style="--rotation: -9deg; --y-offset: 15px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">❄</span>
-            <div class="fan-card-names">Karan &<br>Diya</div>
-            <div class="fan-card-details">December 05, 2026<br>Delhi</div>
-          </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="fan-card card-emerald" style="--rotation: -4deg; --y-offset: 5px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">⚜</span>
-            <div class="fan-card-names">Siddharth &<br>Roshni</div>
-            <div class="fan-card-details">January 18, 2027<br>Udaipur</div>
-          </div>
-        </div>
-        <!-- Card 4 (Center - Flat) -->
-        <div class="fan-card card-royal" style="--rotation: 0deg; --y-offset: 0px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">❦</span>
-            <div class="fan-card-names">Abhishek &<br>Kanika</div>
-            <div class="fan-card-details">November 20, 2026<br>Mumbai</div>
-          </div>
-        </div>
-        <!-- Card 5 -->
-        <div class="fan-card card-lilac" style="--rotation: 4deg; --y-offset: 5px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">❁</span>
-            <div class="fan-card-names">Saurab &<br>Tamanna</div>
-            <div class="fan-card-details">February 10, 2027<br>Pune</div>
-          </div>
-        </div>
-        <!-- Card 6 -->
-        <div class="fan-card card-teal" style="--rotation: 9deg; --y-offset: 15px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">✦</span>
-            <div class="fan-card-names">Kabir &<br>Alia</div>
-            <div class="fan-card-details">December 25, 2026<br>Goa</div>
-          </div>
-        </div>
-        <!-- Card 7 -->
-        <div class="fan-card card-terracotta" style="--rotation: 14deg; --y-offset: 35px;">
-          <div class="fan-card-inner">
-            <span class="fan-card-ornament">✵</span>
-            <div class="fan-card-names">Vikram &<br>Pooja</div>
-            <div class="fan-card-details">March 04, 2027<br>Jodhpur</div>
-          </div>
-        </div>
+  <!-- Section 1: Scroll Morph Hero (Pinnable Section) -->
+  <div class="hero-scroll-track" id="heroScrollTrack">
+    <section class="sticky-hero-container" id="heroContainer">
+      <!-- Intro Text (Fades out) -->
+      <div class="intro-text-block" id="introTextBlock">
+        <h1 class="intro-title">The future is built on AI.</h1>
+        <p class="intro-subtitle">SCROLL TO EXPLORE</p>
       </div>
-    </div>
-  </section>
+
+      <!-- Arc Active Content (Fades in) -->
+      <div class="active-content-block" id="activeContentBlock">
+        <h2 class="active-title">Explore Our Vision</h2>
+        <p class="active-subtitle">
+          Discover a world where technology meets creativity. <br class="hidden-md">
+          Scroll through our curated collection of innovations designed to shape the future.
+        </p>
+      </div>
+
+      <!-- Main Container for Cards -->
+      <div class="morph-cards-container" id="morphCardsContainer">
+        <!-- 20 cards will be generated dynamically in main.js -->
+      </div>
+    </section>
+  </div>
 
   <!-- Section Label: New Releases -->
   <div class="section-divider-container">

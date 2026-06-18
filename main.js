@@ -414,6 +414,256 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- 7. Scroll Morph Hero Animation Engine ---
+  const HERO_IMAGES = [
+    "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=300&q=80",
+    "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=300&q=80",
+    "https://images.unsplash.com/photo-1497366216548-37526070297c?w=300&q=80",
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=300&q=80",
+    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=300&q=80",
+    "https://images.unsplash.com/photo-1506765515384-028b60a970df?w=300&q=80",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=300&q=80",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=300&q=80",
+    "https://images.unsplash.com/photo-1500485035595-cbe6f645feb1?w=300&q=80",
+    "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=300&q=80",
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=300&q=80",
+    "https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?w=300&q=80",
+    "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=300&q=80",
+    "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=300&q=80",
+    "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=300&q=80",
+    "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?w=300&q=80",
+    "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=300&q=80",
+    "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?w=300&q=80",
+    "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?w=300&q=80",
+    "https://images.unsplash.com/photo-1496568816309-51d7c20e3b21?w=300&q=80"
+  ];
 
+  class SpringSolver {
+    constructor(initialValue, stiffness = 0.04, damping = 0.12) {
+      this.current = initialValue;
+      this.target = initialValue;
+      this.velocity = 0;
+      this.stiffness = stiffness;
+      this.damping = damping;
+    }
+    update() {
+      let force = (this.target - this.current) * this.stiffness;
+      this.velocity += force - this.velocity * this.damping;
+      this.current += this.velocity;
+      return this.current;
+    }
+  }
 
+  const lerp = (start, end, t) => start * (1 - t) + end * t;
+
+  const heroScrollTrack = document.getElementById('heroScrollTrack');
+  const heroContainer = document.getElementById('heroContainer');
+  const morphCardsContainer = document.getElementById('morphCardsContainer');
+  const introTextBlock = document.getElementById('introTextBlock');
+  const activeContentBlock = document.getElementById('activeContentBlock');
+
+  if (heroScrollTrack && heroContainer && morphCardsContainer) {
+    // 1. Generate 20 Cards
+    morphCardsContainer.innerHTML = '';
+    const cards = [];
+
+    HERO_IMAGES.forEach((src, idx) => {
+      const card = document.createElement('div');
+      card.className = 'morph-card';
+      card.innerHTML = `
+        <div class="morph-card-inner">
+          <div class="card-front">
+            <img src="${src}" alt="hero-${idx}" loading="lazy">
+            <div class="card-front-overlay"></div>
+          </div>
+          <div class="card-back">
+            <span class="card-back-view">View</span>
+            <p class="card-back-details">Details</p>
+          </div>
+        </div>
+      `;
+      morphCardsContainer.appendChild(card);
+      cards.push(card);
+    });
+
+    // 2. Setup Dimensions
+    let containerWidth = heroContainer.offsetWidth;
+    let containerHeight = heroContainer.offsetHeight;
+
+    function handleResize() {
+      containerWidth = heroContainer.offsetWidth;
+      containerHeight = heroContainer.offsetHeight;
+    }
+    window.addEventListener('resize', handleResize);
+
+    // 3. Setup mousemove parallax
+    let mouseX = 0;
+    heroContainer.addEventListener('mousemove', (e) => {
+      const rect = heroContainer.getBoundingClientRect();
+      const relativeX = e.clientX - rect.left;
+      const normalizedX = (relativeX / rect.width) * 2 - 1; // -1 to 1
+      mouseX = normalizedX * 100; // Move +/- 100px
+    });
+
+    // 4. Setup scroll tracking
+    let virtualScroll = 0;
+    function handleScroll() {
+      const rect = heroScrollTrack.getBoundingClientRect();
+      const scrollY = -rect.top;
+      const maxScroll = rect.height - window.innerHeight;
+      if (maxScroll > 0) {
+        const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
+        virtualScroll = progress * 3000;
+      } else {
+        virtualScroll = 0;
+      }
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+
+    // 5. Phase Transitions
+    let introPhase = "scatter";
+    setTimeout(() => { introPhase = "line"; }, 500);
+    setTimeout(() => { introPhase = "circle"; }, 2500);
+
+    // 6. Define Scatter Positions
+    const scatterPositions = HERO_IMAGES.map(() => ({
+      x: (Math.random() - 0.5) * 1500,
+      y: (Math.random() - 0.5) * 1000,
+      rotation: (Math.random() - 0.5) * 180,
+      scale: 0.6,
+      opacity: 0
+    }));
+
+    // 7. Initialize Springs
+    const morphSpring = new SpringSolver(0, 0.04, 0.12);
+    const rotateSpring = new SpringSolver(0, 0.04, 0.12);
+    const parallaxSpring = new SpringSolver(0, 0.03, 0.12);
+
+    const cardSprings = HERO_IMAGES.map((_, idx) => ({
+      x: new SpringSolver(scatterPositions[idx].x, 0.04, 0.15),
+      y: new SpringSolver(scatterPositions[idx].y, 0.04, 0.15),
+      rotation: new SpringSolver(scatterPositions[idx].rotation, 0.04, 0.15),
+      scale: new SpringSolver(0.6, 0.04, 0.15),
+      opacity: new SpringSolver(0, 0.03, 0.12)
+    }));
+
+    // 8. Animation Loop
+    function tick() {
+      // Update general springs
+      const morphValue = morphSpring.update();
+      const rotateValue = rotateSpring.update();
+      const parallaxValue = parallaxSpring.update();
+
+      // Set targets for general springs based on state
+      morphSpring.target = Math.min(Math.max(virtualScroll / 600, 0), 1);
+      rotateSpring.target = virtualScroll > 600 ? ((virtualScroll - 600) / 2400) * 360 : 0;
+      parallaxSpring.target = mouseX;
+
+      // Update intro text and active content opacity
+      if (introTextBlock) {
+        if (introPhase === "circle" && morphValue < 0.5) {
+          introTextBlock.style.opacity = Math.max(1 - morphValue * 2, 0);
+          introTextBlock.style.filter = `blur(${morphValue * 10}px)`;
+        } else if (introPhase === "circle" && morphValue >= 0.5) {
+          introTextBlock.style.opacity = 0;
+          introTextBlock.style.filter = "blur(10px)";
+        } else {
+          introTextBlock.style.opacity = 1;
+          introTextBlock.style.filter = "blur(0px)";
+        }
+      }
+
+      if (activeContentBlock) {
+        if (morphValue > 0.8) {
+          const t = (morphValue - 0.8) / 0.2; // 0 to 1
+          activeContentBlock.style.opacity = t;
+          activeContentBlock.style.transform = `translateY(${lerp(20, 0, t)}px)`;
+        } else {
+          activeContentBlock.style.opacity = 0;
+          activeContentBlock.style.transform = "translateY(20px)";
+        }
+      }
+
+      // Calculate targets and update card springs
+      cards.forEach((card, i) => {
+        let target = { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1 };
+
+        if (introPhase === "scatter") {
+          target = scatterPositions[i];
+        } else if (introPhase === "line") {
+          const lineSpacing = 70;
+          const lineTotalWidth = 20 * lineSpacing;
+          const lineX = i * lineSpacing - lineTotalWidth / 2;
+          target = { x: lineX, y: 0, rotation: 0, scale: 1, opacity: 1 };
+        } else {
+          // Circle & bottom-strip morph
+          const isMobile = containerWidth < 768;
+          const minDimension = Math.min(containerWidth, containerHeight);
+
+          // A. Circle Position
+          const circleRadius = Math.min(minDimension * 0.35, 350);
+          const circleAngle = (i / 20) * 360;
+          const circleRad = (circleAngle * Math.PI) / 180;
+          const circlePos = {
+            x: Math.cos(circleRad) * circleRadius,
+            y: Math.sin(circleRad) * circleRadius,
+            rotation: circleAngle + 90
+          };
+
+          // B. Bottom Arc Position
+          const baseRadius = Math.min(containerWidth, containerHeight * 1.5);
+          const arcRadius = baseRadius * (isMobile ? 1.4 : 1.1);
+          const arcApexY = containerHeight * (isMobile ? 0.35 : 0.25);
+          const arcCenterY = arcApexY + arcRadius;
+          const spreadAngle = isMobile ? 100 : 130;
+          const startAngle = -90 - (spreadAngle / 2);
+          const step = spreadAngle / 19;
+
+          const scrollProgress = Math.min(Math.max(rotateValue / 360, 0), 1);
+          const maxRotation = spreadAngle * 0.8;
+          const boundedRotation = -scrollProgress * maxRotation;
+
+          const currentArcAngle = startAngle + (i * step) + boundedRotation;
+          const arcRad = (currentArcAngle * Math.PI) / 180;
+
+          const arcPos = {
+            x: Math.cos(arcRad) * arcRadius + parallaxValue,
+            y: Math.sin(arcRad) * arcRadius + arcCenterY,
+            rotation: currentArcAngle + 90,
+            scale: isMobile ? 1.4 : 1.8
+          };
+
+          // C. Interpolate (Morph)
+          target = {
+            x: lerp(circlePos.x, arcPos.x, morphValue),
+            y: lerp(circlePos.y, arcPos.y, morphValue),
+            rotation: lerp(circlePos.rotation, arcPos.rotation, morphValue),
+            scale: lerp(1, arcPos.scale, morphValue),
+            opacity: 1
+          };
+        }
+
+        // Apply springs
+        const springs = cardSprings[i];
+        springs.x.target = target.x;
+        springs.y.target = target.y;
+        springs.rotation.target = target.rotation;
+        springs.scale.target = target.scale;
+        springs.opacity.target = target.opacity;
+
+        const currentX = springs.x.update();
+        const currentY = springs.y.update();
+        const currentRot = springs.rotation.update();
+        const currentScale = springs.scale.update();
+        const currentOpacity = springs.opacity.update();
+
+        card.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${currentRot}deg) scale(${currentScale})`;
+        card.style.opacity = currentOpacity;
+      });
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
 });
