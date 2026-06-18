@@ -482,6 +482,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const morphCardsContainer = document.getElementById('morphCardsContainer');
   const introTextBlock = document.getElementById('introTextBlock');
   const activeContentBlock = document.getElementById('activeContentBlock');
+  const heroAwardBadge = document.getElementById('heroAwardBadge');
 
   if (heroScrollTrack && heroContainer && morphCardsContainer) {
     // 1. Generate 20 Cards
@@ -545,7 +546,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Phase Transitions
     let introPhase = "scatter";
     setTimeout(() => { introPhase = "line"; }, 500);
-    setTimeout(() => { introPhase = "circle"; }, 2500);
+    setTimeout(() => {
+      introPhase = "circle";
+      if (heroAwardBadge) {
+        heroAwardBadge.classList.add('revealed');
+      }
+    }, 2500);
 
     // 6. Define Scatter Positions
     const scatterPositions = HERO_IMAGES.map(() => ({

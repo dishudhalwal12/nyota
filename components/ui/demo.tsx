@@ -34,3 +34,11 @@ export const ProductOfTheWeek = () => {
     </div>
   );
 };
+
+export const NyotaBest = () => {
+  return (
+    <div className="grid grid-cols-1 gap-4">
+      <AwardBadge type="nyota-best" link="#templates" />
+    </div>
+  );
+};

@@ -1541,6 +1541,14 @@ a {
   perspective: 700px;
   pointer-events: auto;
   text-decoration: none;
+  opacity: 0;
+  transform: perspective(700px) scale(0.85) translateY(20px) rotateX(12deg);
+  transition: opacity 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.award-badge.revealed {
+  opacity: 1;
+  transform: perspective(700px) scale(1) translateY(0) rotateX(0deg);
 }
 
 @media (min-width: 768px) {
@@ -1551,12 +1559,36 @@ a {
 }
 
 .award-badge-card {
+  position: relative;
   width: 100%;
   height: auto;
   transform-style: preserve-3d;
   transform: perspective(700px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
   transform-origin: center center;
   transition: transform 200ms ease-out;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.award-badge-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.3) 40%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.3) 60%, transparent 70%);
+  background-size: 200% 100%;
+  background-position: 150% 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  border-radius: 10px;
+}
+
+.award-badge.revealed .award-badge-card::after {
+  animation: shineSweep 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shineSweep {
+  0% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
 }
 
 .award-badge-svg {
